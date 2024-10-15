@@ -1,0 +1,64 @@
+# $CONFIG/helix/config.toml
+theme = "monokai" # "base16_default_dark" # "gruvbox" # "onedark" # "dark_plus"
+
+[editor]
+mouse = true
+true-color = true
+idle-timeout = 100
+auto-completion = true
+shell = ["zsh", "-c"]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.auto-pairs]
+'"' = '"'
+"'" = "'"
+'(' = ')'
+'{' = '}'
+'[' = ']'
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-messages = true
+
+[keys]
+[keys.normal]
+C-s = ":w"
+ins = 'insert_mode'
+del = 'delete_selection'
+C-z = "toggle_comments"
+C-c = ":clipboard-yank"
+C-v = ":clipboard-paste-before"
+C-b = 'goto_next_paragraph'
+C-f = 'goto_prev_paragraph'
+C-u = 'page_up'
+C-d = 'page_down'
+
+[keys.insert]
+ins = 'insert_mode'
+del = 'delete_selection'
+C-z = "toggle_comments"
+C-c = ":clipboard-yank"
+C-v = ":clipboard-paste-before"
+C-b = 'goto_next_paragraph'
+C-f = 'goto_prev_paragraph'
+C-u = 'page_up'
+C-d = 'page_down'
+
+[keys.select]
+ins = 'insert_mode'
+del = 'delete_selection'
+C-z = "toggle_comments"
+C-c = ":clipboard-yank"
+C-v = ":clipboard-paste-before"
+C-b = 'goto_next_paragraph'
+C-f = 'goto_prev_paragraph'
+C-u = 'page_up'
+C-d = 'page_down'
+'v' = "expand_selection"
+'V' = "shrink_selection"
