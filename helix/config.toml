@@ -1,4 +1,4 @@
-# $CONFIG/helix/config.toml
+# $CONFIG/helix/config.toml xor c:/Users/xxx/AppData/Roaming/helix/config.toml
 theme = "monokai" # "base16_default_dark" # "gruvbox" # "onedark" # "dark_plus"
 
 [editor]
@@ -34,8 +34,8 @@ del = 'delete_selection'
 C-z = "toggle_comments"
 C-c = ":clipboard-yank"
 C-v = ":clipboard-paste-before"
-C-b = 'goto_next_paragraph'
-C-f = 'goto_prev_paragraph'
+C-f = 'goto_next_paragraph'
+C-b = 'goto_prev_paragraph'
 C-u = 'page_up'
 C-d = 'page_down'
 
@@ -45,8 +45,8 @@ del = 'delete_selection'
 C-z = "toggle_comments"
 C-c = ":clipboard-yank"
 C-v = ":clipboard-paste-before"
-C-b = 'goto_next_paragraph'
-C-f = 'goto_prev_paragraph'
+C-f = 'goto_next_paragraph'
+C-b = 'goto_prev_paragraph'
 C-u = 'page_up'
 C-d = 'page_down'
 
@@ -56,8 +56,8 @@ del = 'delete_selection'
 C-z = "toggle_comments"
 C-c = ":clipboard-yank"
 C-v = ":clipboard-paste-before"
-C-b = 'goto_next_paragraph'
-C-f = 'goto_prev_paragraph'
+C-f = 'goto_next_paragraph'
+C-b = 'goto_prev_paragraph'
 C-u = 'page_up'
 C-d = 'page_down'
 'v' = "expand_selection"
