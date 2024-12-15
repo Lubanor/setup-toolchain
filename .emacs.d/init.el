@@ -1,5 +1,5 @@
-;;; init.el --- my Emacs configuration for Data Scientists (2024.12.16)
-
+;;; init.el --- my Emacs configuration for Data Scientists
+;;; Win: C:\Users\xxx\AppData\Roaming\.emacs.d (2024.12.16)
 ;;; Commentary:
 ;; Optimized configuration for machine learning/deep learning development,
 ;; algorithm design, data exploration, and document processing.
