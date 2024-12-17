@@ -1,5 +1,5 @@
 ;;; init.el --- Wangz Emacs configuration for Data Scientising
-;; Optimized for Python Programing, Data Exploration, and Document Processing.
+;;; Optimized for Python Programing, Data Exploration, and Document Processing.
 
 ;;; Code:
 (message "Emacs initing")
@@ -66,7 +66,7 @@
 
 ;; 字体设置
 (set-face-attribute 'default nil :family "Fira Code" :height 130) ;Hack
-(set-fontset-font t 'han "SimSun-13")  ; 或 "Microsoft YaHei-13", "PingFang SC", "Noto Sans CJK SC"
+(set-fontset-font t 'han "SimSun-13") ; 或 "Microsoft YaHei-13", "PingFang SC", "Noto Sans CJK SC"
 (set-fontset-font t 'cjk-misc "SimSun-13")
 (set-face-attribute 'mode-line nil :font "SimSun-13")
 
@@ -94,8 +94,70 @@
 (global-auto-revert-mode t)
 
 ;; modal editing
-(require 'evil) ; M-x evil-mode
-(evil-mode 1) ; 启用 evil-mode
+;; Evil基础配置
+(use-package evil
+  :ensure t  ;; 确保安装evil包
+  :init
+  ;; 基础设置
+  (setq evil-want-integration t)          ;; 允许与其他模式集成
+  (setq evil-want-keybinding nil)         ;; 禁用默认键位绑定，使用evil-collection
+  (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行
+
+  :config
+  (evil-mode 1)  ;; 启用evil模式
+
+  ;; 搜索相关设置
+  (setq evil-search-module 'evil-search)           ;; 使用evil的搜索模块
+  (setq evil-ex-search-vim-style-regexp t)         ;; 使用vim风格的正则表达式
+
+  ;; 光标样式设置
+  (setq evil-default-state 'normal)                ;; 默认使用normal状态
+  (setq evil-insert-state-cursor '(bar "green"))   ;; 插入模式下使用绿色竖线
+  (setq evil-normal-state-cursor '(box "orange"))) ;; normal模式下使用橙色方块
+
+;; Evil Collection - 为更多Emacs模式提供Evil支持
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :custom (evil-collection-setup-minibuffer t)
+  :config (evil-collection-init))  ;; 初始化evil-collection
+
+;; Evil Commentary - 快速注释功能
+;; 用法：gc{motion} 注释/取消注释; gcc - 注释当前行
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
+
+;; Evil Matchit - 改进的配对跳转
+;; % 可以在HTML标签、if-else等语法结构间跳转
+(use-package evil-matchit
+  :ensure t
+  :config
+  (global-evil-matchit-mode 1))
+
+;; 自定义键位映射（使用Space作为leader键）
+(with-eval-after-load 'evil-maps
+  ;; 窗口操作
+  (define-key evil-normal-state-map (kbd "SPC v") 'split-window-right)  ;; 垂直分屏
+  (define-key evil-normal-state-map (kbd "SPC s") 'split-window-below)  ;; 水平分屏
+
+  ;; 更多常用映射示例
+  (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)    ;; 切换缓冲区
+  (define-key evil-normal-state-map (kbd "SPC f") 'find-file)           ;; 查找文件
+
+  ;; 窗口跳转
+  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)      ;; 跳转到左窗口
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)      ;; 跳转到下窗口
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)        ;; 跳转到上窗口
+  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right))    ;; 跳转到右窗口
+
+;; 持久性撤销
+(use-package undo-tree
+  :ensure t
+  :config
+  (global-undo-tree-mode)
+  (evil-set-undo-system 'undo-tree))
 
 ;; 补全框架
 (use-package company
@@ -104,7 +166,8 @@
   (setq company-minimum-prefix-length 1
         company-idle-delay 0.1
         company-tooltip-align-annotations t
-        company-show-quick-access t))
+        company-show-quick-access t)
+  (add-hook 'after-init-hook 'global-company-mode))
 
 ;; 语法检查
 (use-package flycheck
@@ -155,12 +218,6 @@
   :mode (("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
-;; Org mode
-(use-package org
-  :config
-  (setq org-startup-indented t
-        org-startup-with-inline-images t))
-
 ;; LaTeX
 (use-package tex
   :ensure auctex
@@ -169,6 +226,34 @@
         TeX-parse-self t
         TeX-PDF-mode t
         TeX-engine 'xetex))
+
+;; Org mode
+(use-package org
+  :config
+  (setq org-startup-folded 'show2levels) ;; 默认展开级别
+
+  (setq org-startup-indented t
+        org-startup-with-inline-images t)
+
+  (setq org-todo-keywords ;; TODO状态序列
+        '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCELLED(c)")))
+
+  (setq org-todo-keyword-faces ;; TODO状态样式
+        '(("TODO" . (:foreground "red" :weight bold))
+          ("NEXT" . (:foreground "blue" :weight bold))
+          ("WAITING" . (:foreground "orange" :weight bold))
+          ("SOMEDAY" . (:foreground "purple" :weight bold))
+          ("DONE" . (:foreground "forest green" :weight bold))
+          ("CANCELLED" . (:foreground "gray" :weight bold)))))
+
+;; Org mode 专用的 Evil 配置
+(use-package evil-org
+  :ensure t
+  :after (evil org)
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 ;; ===============================
 ;; 7. 工具增强
