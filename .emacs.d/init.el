@@ -1,5 +1,5 @@
 ;;; init.el --- Wangz Emacs configuration for Data Scientising
-;; Optimized configuration for Python Programing, Data Exploration, and Document Processing.
+;; Optimized for Python Programing, Data Exploration, and Document Processing.
 
 ;;; Code:
 (message "Emacs initing")
@@ -29,6 +29,7 @@
 (setq locale-coding-system 'utf-8)    ; 此行为Windows添加
 (setq coding-system-for-read 'utf-8)
 (setq coding-system-for-write 'utf-8)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; 性能优化
 (setq gc-cons-threshold (* 1024 1024 20))
@@ -47,8 +48,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(eval-when-compile
-  (require 'use-package))
+(eval-when-compile (require 'use-package))
 (setq use-package-always-ensure t)
 
 ;; ===============================
@@ -68,7 +68,6 @@
 (set-face-attribute 'default nil :family "Fira Code" :height 130) ;Hack
 (set-fontset-font t 'han "SimSun-13")  ; 或 "Microsoft YaHei-13", "PingFang SC", "Noto Sans CJK SC"
 (set-fontset-font t 'cjk-misc "SimSun-13")
-
 (set-face-attribute 'mode-line nil :font "SimSun-13")
 
 ;; 主题设置
@@ -77,16 +76,12 @@
   (load-theme 'doom-one t)
   (doom-themes-org-config))
 
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
+(use-package powerline
+  :ensure t
   :config
-  (setq doom-modeline-icon t)
-  (setq doom-modeline-unicode-fallback t)  ; Windows下使用Unicode字符
-  :custom
-  (doom-modeline-height 25))
+  (powerline-default-theme))
 
-(setq inhibit-compacting-font-caches t)
-; M-x all-the-icons-install-fonts ; 第一次启动可能需要
+(setq inhibit-compacting-font-caches t) ; M-x all-the-icons-install-fonts ; 第一次启动可能需要
 
 ;; ===============================
 ;; 4. 编辑功能
