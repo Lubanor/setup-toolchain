@@ -101,7 +101,7 @@
   ;; 基础设置
   (setq evil-want-integration t)          ;; 允许与其他模式集成
   (setq evil-want-keybinding nil)         ;; 禁用默认键位绑定，使用evil-collection
-  (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行
+  ;; (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行
 
   :config
   (evil-mode 1)  ;; 启用evil模式
@@ -169,7 +169,7 @@
         company-show-quick-access t)
   (add-hook 'after-init-hook 'global-company-mode))
 
-;; 语法检查
+;; 语法检查; flymake/flyspell
 (use-package flycheck
   :init (global-flycheck-mode))
 
@@ -207,7 +207,7 @@
   :custom
   (python-shell-interpreter "python3"))
 
-;; Jupyter支持
+;; Jupyter支持 ob-ipython
 (use-package jupyter)
 
 ;; ===============================
