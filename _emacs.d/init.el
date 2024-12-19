@@ -219,10 +219,10 @@
   (meow-esc-mode 1))
 
 ;; 持久性撤销
-(use-package undo-tree
+(use-package vundo
   :ensure t
-  :config
-  (global-undo-tree-mode))
+  :bind ("C-x u" . vundo) ; 替换默认的undo-tree，绑定到通用的撤销键
+  :config (setq vundo-compact-display t)) ; 使用紧凑显示模式
 
 ;; 补全框架
 (use-package company
@@ -400,7 +400,7 @@
 ;; ===============================
 ;; https://www.emacswiki.org/emacs/LoadingLispFiles
 ;; define some extra custom files
-(message "NOTE: You can define your own custom.org/.el as a plugin to init.el")
+(message "NOTE: You can define your own custom.org and/or custom.el as a plugin to init.el")
 (setq custom-el (expand-file-name "custom.el" user-emacs-directory))
 (setq custom-org (expand-file-name "custom.org" user-emacs-directory))
 (unless (file-exists-p custom-el) (write-region "" nil custom-el)) ; 如果该文件不存在, touch它
