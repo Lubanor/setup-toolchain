@@ -20,20 +20,34 @@
 (setq emacs-start-time (current-time))
 
 ;; 编码设置
-(prefer-coding-system 'utf-8)
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)  ; 此行为Windows添加
-(setq locale-coding-system 'utf-8)    ; 此行为Windows添加
-(setq coding-system-for-read 'utf-8)
-(setq coding-system-for-write 'utf-8)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;; (prefer-coding-system 'utf-8)
+;; (set-language-environment "UTF-8")
+;; (set-default-coding-systems 'utf-8)
+;; (set-terminal-coding-system 'utf-8)
+;; (set-keyboard-coding-system 'utf-8)
+;; (set-selection-coding-system 'utf-8)  ; 此行为Windows添加
+;; (setq locale-coding-system 'utf-8)    ; 此行为Windows添加
+;; (setq coding-system-for-read 'utf-8)
+;; (setq coding-system-for-write 'utf-8)
+;; (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-;; 性能优化
-(setq gc-cons-threshold (* 1024 1024 20))
-(setq read-process-output-max (* 1024 1024))
+;; local
+(defun test-utf8-locale-p (v)
+  "Return whether locale string V relates to a utf-8 locale."
+  (and v (string-match "utf-8" v)))
+
+(defun locale-is-utf8-p ()
+  "Return t if the \"locale\" command or environment variables prefer utf-8."
+  (or (test-utf8-locale-p (and (executable-find "locale") (shell-command-to-string "locale")))
+      (test-utf8-locale-p (getenv "LC_ALL"))
+      (test-utf8-locale-p (getenv "LC_CTYPE"))
+      (test-utf8-locale-p (getenv "LANG"))))
+
+(when (or window-system (locale-is-utf8-p))
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (unless *sys=win64* (set-selection-coding-system 'utf-8))
+  (prefer-coding-system 'utf-8))
 
 ;; ===============================
 ;; 2. 包管理
@@ -41,6 +55,15 @@
 (require 'package)
 (setq package-archives '(("gnu-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                         ("melpa-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+
+;; (setq package-archives '(("gnu" . "http://mirrors.163.com/elpa/gnu/")
+;;                         ("melpa" . "https://melpa.org/packages/")
+;;                         ("org" . "http://orgmode.org/elpa/")
+;;                         ))
+;;
+;; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives '("milkbox" . "https://melpa.milkbox.net/packages/") t)
+
 (package-initialize)
 
 ;; 初始化use-package
@@ -81,7 +104,8 @@
   :config
   (powerline-default-theme))
 
-(setq inhibit-compacting-font-caches t) ; M-x all-the-icons-install-fonts ; 第一次启动可能需要
+(setq inhibit-compacting-font-caches t) ; M-x list-pack... install all-the-icons-install-fonts ; 第一次启动或需
+(setq visible-bell t)                          ; No beep when reporting errors
 
 ;; ===============================
 ;; 4. 编辑功能
@@ -135,22 +159,6 @@
   :ensure t
   :config
   (global-evil-matchit-mode 1))
-
-;; 自定义键位映射（使用Space作为leader键）
-(with-eval-after-load 'evil-maps
-  ;; 窗口操作
-  (define-key evil-normal-state-map (kbd "SPC v") 'split-window-right)  ;; 垂直分屏
-  (define-key evil-normal-state-map (kbd "SPC s") 'split-window-below)  ;; 水平分屏
-
-  ;; 更多常用映射示例
-  (define-key evil-normal-state-map (kbd "SPC b") 'switch-to-buffer)    ;; 切换缓冲区
-  (define-key evil-normal-state-map (kbd "SPC f") 'find-file)           ;; 查找文件
-
-  ;; 窗口跳转
-  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)      ;; 跳转到左窗口
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)      ;; 跳转到下窗口
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)        ;; 跳转到上窗口
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right))    ;; 跳转到右窗口
 
 ;; 持久性撤销
 (use-package undo-tree
@@ -209,6 +217,14 @@
 
 ;; Jupyter支持 ob-ipython
 (use-package jupyter)
+
+;; Clang
+(setq c-default-style "linux")
+(setq c-basic-offset 4)
+
+;; GDB
+(setq gdb-many-windows t)
+(setq gdb-show-main t)
 
 ;; ===============================
 ;; 6. 文档写作
@@ -296,9 +312,58 @@
         recentf-exclude '("/tmp/" "/ssh:"))
   :bind ("C-x C-r" . recentf-open-files))
 
+;; save desktop
+(use-package saveplace
+  :config
+  (save-place-mode 1)
+  (desktop-save-mode t)
+  (setq desktop-restore-frames nil)
+  ;; save a bunch of variables to the desktop file:
+  (setq desktop-globals-to-save
+        (append '((extended-command-history . 128)
+                  (file-name-history        . 128)
+                  (grep-history             . 128)
+                  (compile-history          . 128)
+                  (minibuffer-history       . 128)
+                  (query-replace-history    . 128)
+                  (read-expression-history  . 128)
+                  (regexp-history           . 128)
+                  (regexp-search-ring       . 128)
+                  (search-ring              . 128)
+                  (comint-input-ring        . 128)
+                  (shell-command-history    . 128)
+                  desktop-missing-file-warning
+                  register-alist
+                 ))))
+
+;; Time display
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(display-time)
+
+;;; Miscellaneous
+(setq disabled-command-hook nil)               ; Allow all disabled commands
+(setq undo-limit 100000)                       ; Increase number of undo
+(defalias 'qrr 'query-replace-regexp)          ; Define an alias
+
+;; 性能优化
+(setq-default gc-cons-percentage 0.5)          ; Increase garbage-collection threshold
+(setq gc-cons-threshold (* 1024 1024 20))
+(setq read-process-output-max (* 1024 1024))
+
 ;; ===============================
 ;; 9. 结束配置
 ;; ===============================
+;; https://www.emacswiki.org/emacs/LoadingLispFiles
+;; define some extra custom files
+(setq custom-el (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-org (expand-file-name "custom.org" user-emacs-directory))
+(unless (file-exists-p custom-el) (write-region "" nil custom-el)) ; 如果该文件不存在, touch它
+;
+;; The extra customs will be autoloaded.
+(when (file-exists-p custom-org) (org-babel-tangle-file custom-org))
+(when (file-exists-p custom-el)  (load custom-el))
+
 (setq-default initial-scratch-message
               (concat ";; Happy Explorering in Emacs, "
                       (or user-login-name "") "!\n\n"))
