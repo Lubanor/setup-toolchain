@@ -2,7 +2,7 @@
 ;;; Optimized for Python Programing, Data Exploration, and Document Processing.
 
 ;;; Code:
-(message "Emacs initing")
+(message ">>> Emacs initing")
 
 ;; ===============================
 ;; 1. 基础设置
@@ -20,18 +20,6 @@
 (setq emacs-start-time (current-time))
 
 ;; 编码设置
-;; (prefer-coding-system 'utf-8)
-;; (set-language-environment "UTF-8")
-;; (set-default-coding-systems 'utf-8)
-;; (set-terminal-coding-system 'utf-8)
-;; (set-keyboard-coding-system 'utf-8)
-;; (set-selection-coding-system 'utf-8)  ; 此行为Windows添加
-;; (setq locale-coding-system 'utf-8)    ; 此行为Windows添加
-;; (setq coding-system-for-read 'utf-8)
-;; (setq coding-system-for-write 'utf-8)
-;; (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
-
-;; local
 (defun test-utf8-locale-p (v)
   "Return whether locale string V relates to a utf-8 locale."
   (and v (string-match "utf-8" v)))
@@ -55,14 +43,6 @@
 (require 'package)
 (setq package-archives '(("gnu-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                         ("melpa-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-
-;; (setq package-archives '(("gnu" . "http://mirrors.163.com/elpa/gnu/")
-;;                         ("melpa" . "https://melpa.org/packages/")
-;;                         ("org" . "http://orgmode.org/elpa/")
-;;                         ))
-;;
-;; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives '("milkbox" . "https://melpa.milkbox.net/packages/") t)
 
 (package-initialize)
 
@@ -105,7 +85,7 @@
   (powerline-default-theme))
 
 (setq inhibit-compacting-font-caches t) ; M-x list-pack... install all-the-icons-install-fonts ; 第一次启动或需
-(setq visible-bell t)                          ; No beep when reporting errors
+(setq visible-bell t) ;; No beep when reporting errors
 
 ;; ===============================
 ;; 4. 编辑功能
@@ -117,55 +97,27 @@
 (delete-selection-mode t)
 (global-auto-revert-mode t)
 
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-show-early-on-C-h t)
+  (setq which-key-idle-secondary-delay 0.0))
+
 ;; modal editing
-;; Evil基础配置
-(use-package evil
-  :ensure t  ;; 确保安装evil包
-  :init
-  ;; 基础设置
-  (setq evil-want-integration t)          ;; 允许与其他模式集成
-  (setq evil-want-keybinding nil)         ;; 禁用默认键位绑定，使用evil-collection
-  ;; (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行
-
-  :config
-  (evil-mode 1)  ;; 启用evil模式
-
-  ;; 搜索相关设置
-  (setq evil-search-module 'evil-search)           ;; 使用evil的搜索模块
-  (setq evil-ex-search-vim-style-regexp t)         ;; 使用vim风格的正则表达式
-
-  ;; 光标样式设置
-  (setq evil-default-state 'normal)                ;; 默认使用normal状态
-  (setq evil-insert-state-cursor '(bar "green"))   ;; 插入模式下使用绿色竖线
-  (setq evil-normal-state-cursor '(box "orange"))) ;; normal模式下使用橙色方块
-
-;; Evil Collection - 为更多Emacs模式提供Evil支持
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :custom (evil-collection-setup-minibuffer t)
-  :config (evil-collection-init))  ;; 初始化evil-collection
-
-;; Evil Commentary - 快速注释功能
-;; 用法：gc{motion} 注释/取消注释; gcc - 注释当前行
-(use-package evil-commentary
+(use-package meow
   :ensure t
   :config
-  (evil-commentary-mode))
-
-;; Evil Matchit - 改进的配对跳转
-;; % 可以在HTML标签、if-else等语法结构间跳转
-(use-package evil-matchit
-  :ensure t
-  :config
-  (global-evil-matchit-mode 1))
+  ; (meow-setup) ; `(defun meow-setup () ...)`
+  (unless (bound-and-true-p meow-global-mode)
+    (meow-global-mode 1)))
 
 ;; 持久性撤销
 (use-package undo-tree
   :ensure t
   :config
-  (global-undo-tree-mode)
-  (evil-set-undo-system 'undo-tree))
+  (global-undo-tree-mode))
 
 ;; 补全框架
 (use-package company
@@ -185,8 +137,8 @@
 (use-package projectile
   :config
   (projectile-mode +1)
-  :bind (:map projectile-mode-map
-              ("C-c p" . projectile-command-map)))
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
 
 ;; ===============================
 ;; 5. 开发环境
@@ -194,7 +146,7 @@
 ;; LSP支持
 (use-package lsp-mode
   :init (setq lsp-keymap-prefix "C-c l")
-  :hook ((python-mode . lsp)
+  :hook (((python-mode c-mode) . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
@@ -202,6 +154,7 @@
         lsp-print-performance t))
 
 (use-package lsp-ui
+  :after (lsp-mode)
   :commands lsp-ui-mode
   :config
   (setq lsp-ui-doc-enable t
@@ -261,15 +214,6 @@
           ("SOMEDAY" . (:foreground "purple" :weight bold))
           ("DONE" . (:foreground "forest green" :weight bold))
           ("CANCELLED" . (:foreground "gray" :weight bold)))))
-
-;; Org mode 专用的 Evil 配置
-(use-package evil-org
-  :ensure t
-  :after (evil org)
-  :hook (org-mode . evil-org-mode)
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
 
 ;; ===============================
 ;; 7. 工具增强
@@ -336,11 +280,6 @@
                   register-alist
                  ))))
 
-;; Time display
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t)
-(display-time)
-
 ;;; Miscellaneous
 (setq disabled-command-hook nil)               ; Allow all disabled commands
 (setq undo-limit 100000)                       ; Increase number of undo
@@ -356,19 +295,20 @@
 ;; ===============================
 ;; https://www.emacswiki.org/emacs/LoadingLispFiles
 ;; define some extra custom files
+(message "NOTE: You can define your own custom.org/.el as a plugin to init.el")
 (setq custom-el (expand-file-name "custom.el" user-emacs-directory))
 (setq custom-org (expand-file-name "custom.org" user-emacs-directory))
 (unless (file-exists-p custom-el) (write-region "" nil custom-el)) ; 如果该文件不存在, touch它
-;
+
 ;; The extra customs will be autoloaded.
 (when (file-exists-p custom-org) (org-babel-tangle-file custom-org))
-(when (file-exists-p custom-el)  (load custom-el))
+(when (file-exists-p custom-el) (load custom-el))
 
 (setq-default initial-scratch-message
               (concat ";; Happy Explorering in Emacs, "
                       (or user-login-name "") "!\n\n"))
 
-(message "Emacs ready in %d seconds."
+(message "<<< Emacs ready in %d seconds."
          (time-to-seconds (time-since emacs-start-time)))
 
 (provide 'init)
