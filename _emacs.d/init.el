@@ -1,5 +1,16 @@
 ;;; init.el --- Wangz Emacs configuration for Data Scientising
-;;; Optimized for Daily Programing, Data Exploration, and Document Processing.
+
+;;; Commentary:
+;; This configuration aims to provide a streamlined and efficient Emacs setup for data
+;; science tasks, including computer coding, data exploration, and document processing.
+;; It leverages modern packages like use-package, Evil, LSP, and Projectile to enhance
+;; the editing experience.  Key features include:
+;; - Modal editing with Evil for Vim-like keybindings.
+;; - LSP integration for intelligent code completion and analysis.
+;; - Projectile for project management.
+;; - Org-mode for note-taking and literate programming.
+;; - A clean and modern UI with Doom Themes and Powerline.
+;; - Optimized performance with increased garbage collection thresholds.
 
 ;;; Code:
 (message ">>> Emacs initing")
@@ -155,7 +166,12 @@
 
 ;; 补全框架
 (use-package company
-  :hook (after-init . global-company-mode)
+  :ensure t
+  :hook ((after-init . global-company-mode)
+        (python-mode . company-mode)
+        (racket-mode . company-mode)
+        (go-mode . company-mode)
+        (c-mode . company-mode))
   :config
   (setq company-minimum-prefix-length 1
         company-idle-delay 0.1
@@ -177,8 +193,10 @@
 ;; ===============================
 ;; LSP支持
 (use-package lsp-mode
+  :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
-  :hook (((python-mode c-mode go-mode) . lsp)
+  :hook (((python-mode c-mode) . lsp)
+         ((racket-mode go-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
@@ -192,8 +210,14 @@
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-position 'bottom))
 
+(use-package lsp-treemacs
+  :after lsp-mode
+  :ensure t)
+
 ;; Python环境
+;; Python environment (deferred loading)
 (use-package python-mode
+  :defer t
   :hook (python-mode . (lambda ()
                         (require 'lsp-pyright)
                         (pyvenv-mode 1)))
@@ -203,6 +227,11 @@
 ;; Jupyter支持 ob-ipython
 (use-package jupyter)
 
+;; Racket (deferred loading)
+(use-package racket-mode
+  :defer t
+  :ensure t)
+
 ;; Clang
 (setq c-default-style "linux")
 (setq c-basic-offset 4)
@@ -210,6 +239,7 @@
 ;; Go
 ;; TODO enhancements
 (use-package go-mode
+  :defer t
   :ensure t
   :config
   (setq go-fmt-command "gofmt -w") ; Auto-format on save
