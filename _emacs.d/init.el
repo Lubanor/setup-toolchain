@@ -1,5 +1,5 @@
 ;;; init.el --- Wangz Emacs configuration for Data Scientising
-;;; Optimized for Python Programing, Data Exploration, and Document Processing.
+;;; Optimized for Daily Programing, Data Exploration, and Document Processing.
 
 ;;; Code:
 (message ">>> Emacs initing")
@@ -68,7 +68,9 @@
 (global-visual-line-mode t)
 
 ;; 字体设置
-(set-face-attribute 'default nil :family "Fira Code" :height 130) ;Hack
+(set-face-attribute 'default nil
+  :family "Fira Code"
+  :height 130) ;Hack
 (set-fontset-font t 'han "SimSun-13") ; 或 "Microsoft YaHei-13", "PingFang SC", "Noto Sans CJK SC"
 (set-fontset-font t 'cjk-misc "SimSun-13")
 (set-face-attribute 'mode-line nil :font "SimSun-13")
@@ -81,8 +83,7 @@
 
 (use-package powerline
   :ensure t
-  :config
-  (powerline-default-theme))
+  :config (powerline-default-theme))
 
 (setq inhibit-compacting-font-caches t) ; M-x list-pack... install all-the-icons-install-fonts ; 第一次启动或需
 (setq visible-bell t) ;; No beep when reporting errors
@@ -105,120 +106,48 @@
   (setq which-key-show-early-on-C-h t)
   (setq which-key-idle-secondary-delay 0.0))
 
-;; modal editing:
-;; https://github.com/meow-edit/meow/blob/master/KEYBINDING_QWERTY.org
-(defun meow-setup ()
-  (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-  (meow-motion-overwrite-define-key
-   '("j" . meow-next)
-   '("k" . meow-prev)
-   '("<escape>" . ignore))
+;; modal editing
+;; Evil基础配置
+(use-package evil
+  :ensure t  ;; 确保安装evil包
+  :init
+  ;; 基础设置
+  (setq evil-want-integration t)          ;; 允许与其他模式集成
+  (setq evil-want-keybinding nil)         ;; 禁用默认键位绑定，使用evil-collection
+  ;; (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行
 
-  (meow-leader-define-key
-   ;; SPC j/k will run the original command in MOTION state.
-   '("j" . "H-j")
-   '("k" . "H-k")
-   ;; Use SPC (0-9) for digit arguments.
-   '("0" . meow-digit-argument)
-   '("1" . meow-digit-argument)
-   '("2" . meow-digit-argument)
-   '("3" . meow-digit-argument)
-   '("4" . meow-digit-argument)
-   '("5" . meow-digit-argument)
-   '("6" . meow-digit-argument)
-   '("7" . meow-digit-argument)
-   '("8" . meow-digit-argument)
-   '("9" . meow-digit-argument)
-   '("/" . meow-keypad-describe-key)
-   '("?" . meow-cheatsheet))
-
-  (meow-normal-define-key
-   '("0" . meow-expand-0)
-   '("1" . meow-expand-1)
-   '("2" . meow-expand-2)
-   '("3" . meow-expand-3)
-   '("4" . meow-expand-4)
-   '("5" . meow-expand-5)
-   '("6" . meow-expand-6)
-   '("7" . meow-expand-7)
-   '("8" . meow-expand-8)
-   '("9" . meow-expand-9)
-   '("-" . negative-argument)
-   '(";" . meow-reverse)
-   '("," . meow-inner-of-thing)
-   '("." . meow-bounds-of-thing)
-   '("[" . meow-beginning-of-thing)
-   '("]" . meow-end-of-thing)
-   '("a" . meow-append)
-   '("A" . meow-open-below)
-   '("b" . meow-back-word)
-   '("B" . meow-back-symbol)
-   '("c" . meow-change)
-   '("d" . meow-delete)
-   '("D" . meow-backward-delete)
-   '("e" . meow-next-word)
-   '("E" . meow-next-symbol)
-   '("f" . meow-find)
-   '("g" . meow-cancel-selection)
-   '("G" . meow-grab)
-   '("h" . meow-left)
-   '("H" . meow-left-expand)
-   '("i" . meow-insert)
-   '("I" . meow-open-above)
-   '("j" . meow-next)
-   '("J" . meow-next-expand)
-   '("k" . meow-prev)
-   '("K" . meow-prev-expand)
-   '("l" . meow-right)
-   '("L" . meow-right-expand)
-   '("m" . meow-join)
-   '("n" . meow-search)
-   '("N" . meow-pop-search)
-   '("o" . meow-block)
-   '("O" . meow-to-block)
-   '("p" . meow-yank)
-   '("P" . meow-yank-pop)
-   '("q" . meow-quit)
-   '("Q" . meow-goto-line)
-   '("r" . meow-replace)
-   '("R" . meow-swap-grab)
-   '("s" . meow-kill)
-   '("t" . meow-till)
-   '("T" . meow-till-expand)
-   '("u" . meow-undo)
-   '("U" . meow-undo-in-selection)
-   '("v" . meow-visit)
-   '("V" . meow-kmacro-matches)
-   '("w" . meow-mark-word)
-   '("W" . meow-mark-symbol)
-   '("x" . meow-line)
-   '("X" . meow-goto-line)
-   '("y" . meow-save)
-   '("Y" . meow-sync-grab)
-   '("z" . meow-pop-selection)
-   '("Z" . meow-pop-all-selection)
-   '("'" . repeat)
-   '("\\" . meow-query-replace)
-   '("<escape>" . ignore)))
-
-(use-package meow
-  :ensure t
   :config
-  (setq
-    meow-esc-delay 0.001
-    meow-select-on-change t
-    meow-cursor-type-normal 'box
-    meow-cursor-type-insert '(bar . 4)
-    meow-keypad-describe-delay 0.5
-    meow-expand-hint-remove-delay 2.0)
-  (meow-setup)
-  (meow-setup-indicator)
-  (meow-setup-line-number)
-  (unless (bound-and-true-p meow-global-mode)
-    (meow-global-mode 1))
-  (meow-esc-mode 1))
+  (evil-mode 1)  ;; 启用evil模式
 
-;; 持久性撤销
+  ;; 搜索相关设置
+  (setq evil-search-module 'evil-search)           ;; 使用evil的搜索模块
+  (setq evil-ex-search-vim-style-regexp t)         ;; 使用vim风格的正则表达式
+
+  ;; 光标样式设置
+  (setq evil-default-state 'normal)                ;; 默认使用normal状态
+  (setq evil-insert-state-cursor '(bar "green"))   ;; 插入模式下使用绿色竖线
+  (setq evil-normal-state-cursor '(box "orange"))) ;; normal模式下使用橙色方块
+
+;; Evil Collection - 为更多Emacs模式提供Evil支持
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :custom (evil-collection-setup-minibuffer t)
+  :config (evil-collection-init))  ;; 初始化evil-collection
+
+;; Evil Commentary - 快速注释功能
+;; 用法：gc{motion} 注释/取消注释; gcc - 注释当前行
+(use-package evil-commentary
+  :ensure t
+  :config (evil-commentary-mode))
+
+;; Evil Matchit - 改进的配对跳转
+;; % 可以在HTML标签、if-else等语法结构间跳转
+(use-package evil-matchit
+  :ensure t
+  :config (global-evil-matchit-mode 1))
+
+;; 撤销
 (use-package vundo
   :ensure t
   :bind ("C-x u" . vundo) ; 替换默认的undo-tree，绑定到通用的撤销键
@@ -240,10 +169,8 @@
 
 ;; 项目管理
 (use-package projectile
-  :config
-  (projectile-mode +1)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
+  :config (projectile-mode +1)
+  :bind-keymap ("C-c p" . projectile-command-map))
 
 ;; ===============================
 ;; 5. 开发环境
@@ -251,7 +178,7 @@
 ;; LSP支持
 (use-package lsp-mode
   :init (setq lsp-keymap-prefix "C-c l")
-  :hook (((python-mode c-mode) . lsp)
+  :hook (((python-mode c-mode go-mode) . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
@@ -279,6 +206,14 @@
 ;; Clang
 (setq c-default-style "linux")
 (setq c-basic-offset 4)
+
+;; Go
+;; TODO enhancements
+(use-package go-mode
+  :ensure t
+  :config
+  (setq go-fmt-command "gofmt -w") ; Auto-format on save
+  (add-hook 'go-mode-hook 'gofmt-before-save)) ; Enable auto-formatting
 
 ;; GDB
 (setq gdb-many-windows t)
@@ -320,14 +255,22 @@
           ("DONE" . (:foreground "forest green" :weight bold))
           ("CANCELLED" . (:foreground "gray" :weight bold)))))
 
+;; Org mode 专用的 Evil 配置
+(use-package evil-org
+  :ensure t
+  :after (evil org)
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 ;; ===============================
 ;; 7. 工具增强
 ;; ===============================
 ;; 搜索增强
 (use-package ivy
   :init (ivy-mode 1)
-  :config
-  (setq ivy-use-virtual-buffers t))
+  :config (setq ivy-use-virtual-buffers t))
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
@@ -343,8 +286,7 @@
          ("C-x t t" . treemacs)))
 
 ;; 版本控制
-(use-package magit
-  :bind ("C-x g" . magit-status))
+(use-package magit :bind ("C-x g" . magit-status))
 
 ;; ===============================
 ;; 8. 其他设置
@@ -400,7 +342,7 @@
 ;; ===============================
 ;; https://www.emacswiki.org/emacs/LoadingLispFiles
 ;; define some extra custom files
-(message "NOTE: You can define your own custom.org and/or custom.el as a plugin to init.el")
+(message "NOTE: You can define your own custom.org and/or custom.el as init.el extentions.")
 (setq custom-el (expand-file-name "custom.el" user-emacs-directory))
 (setq custom-org (expand-file-name "custom.org" user-emacs-directory))
 (unless (file-exists-p custom-el) (write-region "" nil custom-el)) ; 如果该文件不存在, touch它
@@ -410,11 +352,9 @@
 (when (file-exists-p custom-el) (load custom-el))
 
 (setq-default initial-scratch-message
-              (concat ";; Happy Explorering in Emacs, "
-                      (or user-login-name "") "!\n\n"))
+              (concat ";; Happy Explorering in Emacs, " (or user-login-name "") "!\n\n"))
 
-(message "<<< Emacs ready in %d seconds."
-         (time-to-seconds (time-since emacs-start-time)))
+(message "<<< Emacs ready in %d seconds." (time-to-seconds (time-since emacs-start-time)))
 
 (provide 'init)
 ;;; init.el ends here
