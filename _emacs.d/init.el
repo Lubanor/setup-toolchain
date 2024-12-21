@@ -195,8 +195,8 @@
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
-  :hook (((python-mode c-mode) . lsp)
-         ((racket-mode go-mode) . lsp-deferred)
+  :hook (;((python-mode c-mode) . lsp)
+         ;((racket-mode go-mode) . lsp-deferred)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
