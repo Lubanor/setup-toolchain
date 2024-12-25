@@ -52,8 +52,9 @@
 ;; 2. 包管理
 ;; ===============================
 (require 'package)
-(setq package-archives '(("gnu-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                        ("melpa-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+(setq package-archives
+      '(("gnu-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+        ("melpa-tsinghua" . "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 (package-initialize)
 
@@ -82,6 +83,7 @@
 (set-face-attribute 'default nil
   :family "Fira Code"
   :height 130) ;Hack
+
 (set-fontset-font t 'han "SimSun-13") ; 或 "Microsoft YaHei-13", "PingFang SC", "Noto Sans CJK SC"
 (set-fontset-font t 'cjk-misc "SimSun-13")
 (set-face-attribute 'mode-line nil :font "SimSun-13")
@@ -109,6 +111,11 @@
 (delete-selection-mode t)
 (global-auto-revert-mode t)
 
+;;保存时自动清除行位空格
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+;; 按键提示, auto F1/?/C-h
 (use-package which-key
   :ensure t
   :config
@@ -125,7 +132,8 @@
   ;; 基础设置
   (setq evil-want-integration t)          ;; 允许与其他模式集成
   (setq evil-want-keybinding nil)         ;; 禁用默认键位绑定，使用evil-collection
-  ;; (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行
+  (setq evil-cross-lines t)               ;; 行尾右移时自动跳到下一行
+  ;; (setq evil-respect-visual-line-mode t)  ;; 在换行时遵循视觉行, 不好用
 
   :config
   (evil-mode 1)  ;; 启用evil模式
@@ -195,9 +203,10 @@
 (use-package lsp-mode
   :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
-  :hook (;((python-mode c-mode) . lsp)
-         ;((racket-mode go-mode) . lsp-deferred)
-         (lsp-mode . lsp-enable-which-key-integration))
+  :hook
+  (;((python-mode c-mode) . lsp)
+   ;((racket-mode go-mode) . lsp-deferred)
+   (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
   (setq lsp-idle-delay 0.1
@@ -221,8 +230,7 @@
   :hook (python-mode . (lambda ()
                         (require 'lsp-pyright)
                         (pyvenv-mode 1)))
-  :custom
-  (python-shell-interpreter "python3"))
+  :custom (python-shell-interpreter "python3"))
 
 ;; Jupyter支持 ob-ipython
 (use-package jupyter)
@@ -254,8 +262,9 @@
 ;; ===============================
 ;; Markdown
 (use-package markdown-mode
-  :mode (("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode)))
+  :mode
+  (("\\.md\\'" . markdown-mode)
+   ("\\.markdown\\'" . markdown-mode)))
 
 ;; LaTeX
 (use-package tex
@@ -316,7 +325,8 @@
          ("C-x t t" . treemacs)))
 
 ;; 版本控制
-(use-package magit :bind ("C-x g" . magit-status))
+(use-package magit
+  :bind ("C-x g" . magit-status))
 
 ;; ===============================
 ;; 8. 其他设置
@@ -339,7 +349,7 @@
   (save-place-mode 1)
   (desktop-save-mode t)
   (setq desktop-restore-frames nil)
-  ;; save a bunch of variables to the desktop file:
+  ;; save a bunch of variables to the desktop file
   (setq desktop-globals-to-save
         (append '((extended-command-history . 128)
                   (file-name-history        . 128)
@@ -360,7 +370,7 @@
 ;;; Miscellaneous
 (setq disabled-command-hook nil)               ; Allow all disabled commands
 (setq undo-limit 100000)                       ; Increase number of undo
-(defalias 'qrr 'query-replace-regexp)          ; Define an alias
+(defalias 'oio 'query-replace-regexp)          ; Define an alias (similar to %)
 
 ;; 性能优化
 (setq-default gc-cons-percentage 0.5)          ; Increase garbage-collection threshold
