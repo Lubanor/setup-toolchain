@@ -7,8 +7,11 @@ import re
 import os
 import sys
 import time
-import enum
 import string
+
+import torch
+import torchdata
+import torchvision
 
 import numpy as np
 import scipy as sp
@@ -36,14 +39,10 @@ from matplotlib.dates import date2num, num2date, datestr2num, drange, DateFormat
 #   YearLocator, MonthLocator, WeekdayLocator, DayLocator, HourLocator, MinuteLocator, SecondLocator,
 #   YEARLY, MONTHLY, WEEKLY, DAILY, HOURLY, MINUTELY, SECONDLY, MO, TU, WE, TH, FR, SA, SU)
 
-import torch # as trh
 from torch import nn, optim
-from torch.utils.data import DataLoader, Dataset
-
-from typing import NewType
-from einops import rearrange
-
-EPSILON = 1e-7
+from torch.nn import functional as F
+# from torch.utils.data import Dataset, DataLoader
+# from torchvision import datasets, models, transforms
 
 '''
 import sklearn.preprocessing as prep
@@ -106,7 +105,7 @@ def live_days():
 def xuan_cal(tdy=[], ref=[1, 12, 22]):
     """
     玄历
-      - 西元前1年冬至为开始计历的元日  (纪念太玄经; 玄0年~=西1年);
+      - 西元前1年冬至为开始计历的元日 (纪念太玄经; 玄0年~=西1年);
       - 冬至为每年的第零天 (冬至=新年; 元旦: 西1.1, 春节: 夏1.1);
       - 每月30天(0~29), 每年重置(每月编号0..11., 第12月只有几天).
     """
@@ -408,6 +407,7 @@ def polyval2d(x, y, m):
 '''
 a=array([ [i, j, i**2+(100-j)**2]  for i in range(100)  for j in range(100) ])
 m = polyfit2d(a[:,0], a[:,1], a[:,2], [3,3]) # fits it!
+
 m is :
 array([[  1.00000033e+04,  -2.00000024e+02,   9.99998625e-01,  1.18931529e-08],
        [ -4.10125405e-05,  -1.30057323e-06,   5.62423528e-08, -3.80531578e-10],
@@ -419,6 +419,7 @@ The above matrix m gives coefficients of (x, y)
 (1, 0) (1, 1) (1, 2) (1, 3)
 (2, 0) (2, 1) (2, 2) (2, 3)
 (3, 0) (3, 1) (3, 2) (3, 3)
+
 tmp = polyval2d(a[:,0], a[:,1], m) # compute the fitting vals at each point
 plot(abs(tmp-a[:,2])) # checherrors
 '''
