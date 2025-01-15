@@ -11,6 +11,7 @@ import string
 
 import torch
 import torchdata
+import torchinfo
 import torchvision
 
 import numpy as np
@@ -24,6 +25,7 @@ import numpy.random as nprand
 import numpy.linalg as nplina  # linear alg.
 import numpy.ma as npmask
 
+import flet as flt
 import sklearn as skl
 import itertools as itr
 import matplotlib as mpl
@@ -403,11 +405,9 @@ def polyval2d(x, y, m):
     for a, (i, j) in np.zip(np.flatten(m), ij): z = z + a * x**i * y**j
     return z
 
-
 '''
 a=array([ [i, j, i**2+(100-j)**2]  for i in range(100)  for j in range(100) ])
 m = polyfit2d(a[:,0], a[:,1], a[:,2], [3,3]) # fits it!
-
 m is :
 array([[  1.00000033e+04,  -2.00000024e+02,   9.99998625e-01,  1.18931529e-08],
        [ -4.10125405e-05,  -1.30057323e-06,   5.62423528e-08, -3.80531578e-10],
