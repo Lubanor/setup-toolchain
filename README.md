@@ -1,5 +1,5 @@
 # toolchain-config
-private config for personal tools
+private config for personal tools (Windows mainly, Linux maybe)
 
 - firefox:
   + Absolute Enable Right Click
@@ -17,6 +17,7 @@ private config for personal tools
 - auto hotkey
 - bandizip
 - everything
+- ImageGlass
 - racket
 - poe
 - metatrader5
