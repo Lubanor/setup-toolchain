@@ -15,10 +15,10 @@ return {
   -- Telescope (Fuzzy Finder)
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.x', -- Or latest stable
+    -- tag = '0.1.x', -- Or latest stable
     dependencies = { 'plenary', 'nvim-web-devicons' },
     config = function()
-      require('plugins.configs.telescope')
+      require('plugins.telescope')
     end,
   },
   { -- Telescope fzf-native sorter for performance
@@ -40,7 +40,7 @@ return {
       -- For autocompletion, nvim-cmp is listed below
     },
     config = function()
-      require('plugins.configs.lsp')
+      require('plugins.lsp')
     end,
   },
 
@@ -57,7 +57,7 @@ return {
       'saadparwaiz1/cmp_luasnip',
     },
     config = function()
-      require('plugins.configs.cmp')
+      require('plugins.cmp')
     end,
   },
 
@@ -67,7 +67,7 @@ return {
     build = ':TSUpdate',
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require('plugins.configs.treesitter')
+      require('plugins.treesitter')
     end,
   },
 
@@ -77,7 +77,7 @@ return {
     dependencies = { 'nvim-web-devicons' },
     event = "VeryLazy", -- Load when everything else is done
     config = function()
-      require('plugins.configs.lualine')
+      require('plugins.lualine')
     end,
   },
 
@@ -156,7 +156,7 @@ return {
   --   'nvim-tree/nvim-tree.lua',
   --   version = "*",
   --   dependencies = { 'nvim-web-devicons' },
-  --   config = function() require('plugins.configs.nvimtree') end,
+  --   config = function() require('plugins.nvimtree') end,
   -- },
 
   -- Dashboard/Start screen (alternative to vim-startify)
