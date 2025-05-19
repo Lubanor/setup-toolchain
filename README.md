@@ -1,6 +1,8 @@
 # toolchain-config
 private config for personal tools (Windows mainly, Linux maybe)
 
+Also ref: [install Linux as the 2nd OS](https://github.com/Lubanor/setup-toolchain/blob/main/Linux_as2nd.md).
+
 - firefox:
   + Absolute Enable Right Click
   + Tabliss
@@ -13,24 +15,26 @@ private config for personal tools (Windows mainly, Linux maybe)
   + Disconnect
   + 网页截图
 
-- free download manager
+- double commander
 - auto hotkey
 - bandizip
+- anaconda / miniconda
+- racket
+- free download manager
 - everything
 - ImageGlass
-- racket
 - poe
-- metatrader5
-- obs studio
 - editor
-  + helix
-  + lapce
   + neovim
   + notepad++
   + geany
-- double commander
+- Sumatra PDF
 - cygwin64 terminal
-- okular
 - mpv
+
+---
+
 - docker
 - ibkr desktop
+- metatrader5
+- obs studio
