@@ -81,6 +81,6 @@ git config --global user.email "---"
 ```
   fish at amule mpv code neovim xfce4-goodies catfish
   i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xclip fd synapse
-  texlive-core texlive-latexextra texlive-langchinese wqy-zenhei-fonts wqy-microhei-fonts
+  wqy-zenhei wqy-microhei # texlive-core texlive-latexextra texlive-langchinese
  ```
 10. 配置keyboard layout: add `xmodmap ~/.Xmodmap` to file `~/.bashrc` or to `zsh/fish/xprofile` etc.
