@@ -40,3 +40,45 @@
 2. 更新 `sudo pacman -Syu`
 3. 在 Pacman 软件包管理器中, 启用对 Snap 和 Flatpak 的支持
 4. 启用 TRIM (4SSD) `sudo systemctl enable fstrim.timer`
+5. 安装中文输入法
+- 安装依赖
+```
+sudo pacman -S fcitx5 
+sudo pacman -S fcitx5-configtool  
+sudo pacman -S fcitx5-qt
+sudo pacman -S fcitx5-gtk
+sudo pacman -S fcitx5-chinese-addons
+sudo pacman -S fcitx5-material-color
+sudo pacman -S kcm-fcitx5
+sudo pacman -S fcitx5-lua
+```
+
+- 配置环境
+```
+sudo chmod 777 /etc/environment
+nvim  /etc/environment
+```
+
+添加:
+```
+GTK_IM_MODULE DEFAULT=fcitx
+QT_IM_MODULE  DEFAULT=fcitx
+XMODIFIERS    DEFAULT=@im=fcitx
+INPUT_METHOD  DEFAULT=fcitx
+SDL_IM_MODULE DEFAULT=fcitx
+```
+6. 现在xfce的sh改为zsh了, 比bash确实强不少, 但还是不如fish顺手: `sudo chsh -s /usr/bin/fish [my_user_name]`
+7. git配置
+```
+git config --global user.name "---"
+git config --global user.email "---"
+# git config --global http.emptyAuth true
+```
+8. 使用本地时间: `sudo timedatectl set-local-rtc true` # 避免两个系统打架(甚至会影响v2ry)
+9. 安装其他必要的软件
+```
+  fish neovim neovim-qt emacs at amule mpv code
+  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xfce4-goodies catfish xclip fd
+  texlive-core texlive-latexextra texlive-langchinese wqy-zenhei-fonts wqy-microhei-fonts synapse
+ ```
+10. 配置keyboard layout: add `xmodmap ~/.Xmodmap` to file `~/.bashrc` or to `zsh/fish/xprofile` etc.
