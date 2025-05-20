@@ -84,3 +84,7 @@ git config --global user.email "---"
   wqy-zenhei wqy-microhei # texlive-core texlive-latexextra texlive-langchinese
  ```
 10. 配置keyboard layout: add `xmodmap ~/.Xmodmap` to file `~/.bashrc` or to `zsh/fish/xprofile` etc.
+11. 安装Miniconda
+    - 从[Miniconda清华源](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/), 下载`Miniconda3-py3X_最新版本号-Linux-x86_64.sh`, `sh Miniconda3*.sh`安装
+    - 参照tuna文档, 配置init.py, pip/conda的源
+    - 安装需要的库, pytorch...
