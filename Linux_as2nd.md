@@ -79,8 +79,8 @@ git config --global user.email "---"
 8. 使用本地时间: `sudo timedatectl set-local-rtc true` # 避免两个系统打架(甚至会影响v2ry)
 9. 安装其他必要的软件
 ```
-  fish neovim neovim-qt emacs at amule mpv code
-  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xfce4-goodies catfish xclip fd
-  texlive-core texlive-latexextra texlive-langchinese wqy-zenhei-fonts wqy-microhei-fonts synapse
+  fish at amule mpv code neovim xfce4-goodies catfish
+  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xclip fd synapse
+  texlive-core texlive-latexextra texlive-langchinese wqy-zenhei-fonts wqy-microhei-fonts
  ```
 10. 配置keyboard layout: add `xmodmap ~/.Xmodmap` to file `~/.bashrc` or to `zsh/fish/xprofile` etc.
