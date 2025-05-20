@@ -1,6 +1,6 @@
 # 2025-5-20 前夜 草记
 
-- 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定: **_除非进行相关的开发, 否则以Windows为主._**
+- 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定: **_开发全到Linux, 其他仍以Windows为主._**
 
 几天没留神, 那个天天想给用户当爹的微软, 最近在PC机的双系统启动上, 又贱呲呲地搞了许多的小动作.
 
@@ -8,6 +8,7 @@
 
 ### 1. 前期设置(重要提醒: 依次进行):
 1. 禁用Windows的BitLocker
+
 2. 进入BIOS设置(\[Enter\] F1):
    1) 设置BIOS模式为UEFI (而不是Legacy; 当下新机默认就是UEFI, 不再兼任传统选项)
    2) 将Secure Boot设置为Disabled(重要! 安装前必须)
@@ -43,32 +44,8 @@
 3. 在 Pacman 软件包管理器中, 启用对 Snap 和 Flatpak 的支持
 4. 启用 TRIM (4SSD) `sudo systemctl enable fstrim.timer`
 5. 安装中文输入法
-- 安装依赖
-```
-sudo pacman -S fcitx5 
-sudo pacman -S fcitx5-configtool  
-sudo pacman -S fcitx5-qt
-sudo pacman -S fcitx5-gtk
-sudo pacman -S fcitx5-chinese-addons
-sudo pacman -S fcitx5-material-color
-sudo pacman -S kcm-fcitx5
-sudo pacman -S fcitx5-lua
-```
-
-- 配置环境
-```
-sudo chmod 777 /etc/environment
-nvim  /etc/environment
-```
-
-添加:
-```
-GTK_IM_MODULE DEFAULT=fcitx
-QT_IM_MODULE  DEFAULT=fcitx
-XMODIFIERS    DEFAULT=@im=fcitx
-INPUT_METHOD  DEFAULT=fcitx
-SDL_IM_MODULE DEFAULT=fcitx
-```
+   - `Manjaro Hello` -> `Applications` -> `Extended language support` -> 选择`fcitx`或`ibus` -> `update system`
+   - 下载安装完成后, 会返回`fcitx/ibus选择界面`, 重启即可
 6. 现在xfce的sh改为zsh了, 比bash确实强不少, 但还是不如fish顺手: `sudo chsh -s /usr/bin/fish [my_user_name]`
 7. git配置
 ```
@@ -81,10 +58,13 @@ git config --global user.email "---"
 ```
   fish at amule mpv code neovim xfce4-goodies catfish
   i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xclip fd synapse
-  wqy-zenhei wqy-microhei # texlive-core texlive-latexextra texlive-langchinese
+  wqy-zenhei wqy-microhei noto-fonts-cjk
+  # texlive-core texlive-latexextra texlive-langchinese
  ```
 10. 配置keyboard layout: add `xmodmap ~/.Xmodmap` to file `~/.bashrc` or to `zsh/fish/xprofile` etc.
 11. 安装Miniconda
-    - 从[Miniconda清华源](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/), 下载`Miniconda3-py3X_最新版本号-Linux-x86_64.sh`, `sh Miniconda3*.sh`安装
-    - 参照tuna文档, 配置init.py, pip/conda的源
-    - 安装需要的库, pytorch...
+    - 从[Miniconda清华源](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/), 下载`Miniconda3-py310_最新日期-Linux-x86_64.sh`, `sh Miniconda3-py310*.sh`安装
+    - 更新pip源: `python -m pip install --upgrade pip; pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple`
+    - 更新conda的源: `~/.condarc`
+    - 配置init.py, 安装需要的库(pytorch torchvision torchaudio...)
+12. 安装gcc: `sudo pacman -S gcc gcc-libs gdb`
