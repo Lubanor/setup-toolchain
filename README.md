@@ -24,8 +24,8 @@ Also ref: [install Linux as the 2nd OS](https://github.com/Lubanor/setup-toolcha
 - everything
 - ImageGlass
 - poe
-- editor
-  + neovim
+- editor (update: del geeky editors: emacs, vim/neovim, helix, ... @ 2025.5.20)
+  + code
   + notepad++
   + geany
 - Sumatra PDF
