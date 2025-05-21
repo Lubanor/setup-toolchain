@@ -1,6 +1,8 @@
 # 2025-5-20 前夜 草记
 
-- 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定: **_开发全到Linux, 其他仍以Windows为主._**
+- 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定:
+- **_平时只以一个系统为主, 另一个只为备用._**
+- **Linux中, 只用一个桌面, 另一个只为备用.**
 
 几天没留神, 那个天天想给用户当爹的微软, 最近在PC机的双系统启动上, 又贱呲呲地搞了许多的小动作.
 
@@ -17,7 +19,7 @@
 
 3. **Note** 关于如何进入BIOS设置, 当下Thinkpad的BIOS中有Boot Mode选项:
 - 默认为Quick(快速启动), 这种模式下, 要进入BIOS设置, 需先按Enter然后再按F1
-- 还有一种Diagnose(诊断启动), 这种模式下, 看到开机自检后, 按F1就可以直接进入BIOS(个人喜欢这种方式)
+- 还有一种Diagnose(诊断启动), 这种模式下, 开机自检时, 按F1就可以直接进入BIOS(个人喜欢这种方式)
 
 ### 2. 媒介准备
 1. 在Windows任务栏Start Flag上, 右击鼠标, 选择`磁盘管理`, 打开磁盘管理器
@@ -72,5 +74,7 @@ git config --global user.email "---"
 13. 嵌入式开发:
     - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
     - 在vscode中, 安装插件: `ESP-IDF`
-14. Fuck GFW: 使用v2ray?
-15. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景
+14. Fuck GFW:
+    - 下载`v2rayN-linux-64.AppImage`, from https://github.com/2dust/v2rayn/releases?after=latest
+    - 设置权限并运行, 然后在主界面添加配置
+16. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景
