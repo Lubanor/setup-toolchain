@@ -1,4 +1,5 @@
 # toolchain-config
+
 private config for personal tools (Windows mainly, Linux maybe)
 
 Also ref: [install Linux as the 2nd OS](https://github.com/Lubanor/setup-toolchain/blob/main/Linux_as2nd.md).
@@ -38,3 +39,7 @@ Also ref: [install Linux as the 2nd OS](https://github.com/Lubanor/setup-toolcha
 - ibkr desktop
 - metatrader5
 - obs studio
+
+---
+
+win -> `管理应用执行别名` -> 关闭`python/python3`的相关别名
