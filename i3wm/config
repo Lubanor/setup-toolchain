@@ -21,12 +21,11 @@ exec --no-startup-id dex --autostart --environment i3
 # NetworkManager is popular to manage wireless networks on Linux, and nm-applet is its system tray.
 exec --no-startup-id nm-applet
 
-# mate applets
-# exec --no-startup-id krunner
-exec --no-startup-id mate-power-manager
-exec --no-startup-id mate-appearance-properties
-exec --no-startup-id mate-volume-control-status-icon
-exec pkill mate-appearance-properties
+# fcitx 
+exec --no-startup-id fcitx-autostart
+
+# resolution ratio
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -48,17 +47,17 @@ bindsym $mod+1       exec "rofi -show window"
 bindsym $mod+Shift+1 exec "rofi -modi drun,run -show run"
 
 # start an app or switch to it # chrome is very power consuming
-bindsym $mod+2     [class="(?i)google-chrome"] focus
-bindsym $mod+3     [class="(?i)emacs"] focus
+bindsym $mod+2     [class="(?i)firefox"] focus
+bindsym $mod+3     [class="(?i)code"] focus
 bindsym $mod+4     [class="(?i)doublecmd"] focus
-bindsym $mod+5     [class="(?i)terminator"] focus
-bindsym $mod+Return [class="(?i)terminator"] focus
+bindsym $mod+5     [class="(?i)xfce4-terminal"] focus
+bindsym $mod+Return [class="(?i)xfce4-terminal"] focus
 # ---
-bindsym $mod+Shift+2     exec google-chrome-stable
-bindsym $mod+Shift+3     exec emacs
+bindsym $mod+Shift+2     exec firefox
+bindsym $mod+Shift+3     exec code
 bindsym $mod+Shift+4     exec doublecmd
-bindsym $mod+Shift+5     exec terminator
-bindsym $mod+Shift+Return exec terminator
+bindsym $mod+Shift+5     exec xfce4-terminal
+bindsym $mod+Shift+Return exec xfce4-terminal
 
 # switch task
 bindsym $mod+Tab       exec "rofi -show window"
@@ -206,15 +205,15 @@ mode "quantify" {
 
 # launch
 mode "watch" {
-    bindsym w [class="(?i)google-chrome"] focus; mode "default"
-    bindsym e [class="(?i)emacs"] focus; mode "default"
+    bindsym w [class="(?i)firefox"] focus; mode "default"
+    bindsym e [class="(?i)code"] focus; mode "default"
     bindsym f [class="(?i)doublecmd"] focus; mode "default"
-    bindsym t [class="(?i)terminator"] focus; mode "default"
+    bindsym t [class="(?i)xfce4-terminal"] focus; mode "default"
 
-    bindsym 2 [class="(?i)google-chrome"] focus; mode "default"
-    bindsym 3 [class="(?i)emacs"] focus; mode "default"
+    bindsym 2 [class="(?i)firefox"] focus; mode "default"
+    bindsym 3 [class="(?i)code"] focus; mode "default"
     bindsym 4 [class="(?i)doublecmd"] focus; mode "default"
-    bindsym 5 [class="(?i)terminator"] focus; mode "default"
+    bindsym 5 [class="(?i)xfce4-terminal"] focus; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -223,15 +222,15 @@ mode "watch" {
 
 # jumpto
 mode "do" {
-    bindsym w exec google-chrome; mode "default"
-    bindsym e exec emacs; mode "default"
+    bindsym w exec firefox; mode "default"
+    bindsym e exec code; mode "default"
     bindsym f exec doublecmd; mode "default"
-    bindsym t exec terminator; mode "default"
+    bindsym t exec xfce4-terminal; mode "default"
 
-    bindsym 2 exec google-chrome; mode "default"
-    bindsym 3 exec emacs; mode "default"
+    bindsym 2 exec firefox; mode "default"
+    bindsym 3 exec code; mode "default"
     bindsym 4 exec doublecmd; mode "default"
-    bindsym 5 exec terminator; mode "default"
+    bindsym 5 exec xfce4-terminal; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
