@@ -1,8 +1,8 @@
 # 2025-5-20 前夜 草记
 
 - 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定:
-- **_平时只以一个系统为主, 另一个只为备用._**
-- **Linux中, 只用一个桌面, 另一个只为备用.**
+- **_平时只以一个系统为主(Linux), 另一个(Win)只为备用._**
+- **Linux中, 只用一个桌面(xfce), 另一个(i3wm)只为备用.**
 
 几天没留神, 那个天天想给用户当爹的微软, 最近在PC机的双系统启动上, 又贱呲呲地搞了许多的小动作.
 
@@ -43,7 +43,7 @@
 然而, 这里还有一系列的后续工作要做, 最主要的就是:
 1. 换源 `sudo pacman-mirrors --fasttrack`
 2. 更新 `sudo pacman -Syu`
-3. 启用对 `Snap` (和 `Flatpak`? 不要`AUR`!!) 的支持: `sudo pamac install libpamac-snap-plugin`
+3. 启用对 `Snap` (和 `Flatpak`? 不要`AUR`!!) 的支持: `sudo pamac install libpamac-snap-plugin` (开启Flatpak, 也会有杂七杂八的问题)
 4. 启用 TRIM (4SSD) `sudo systemctl enable fstrim.timer`
 5. 安装中文输入法
    - `Manjaro Hello` -> `Applications` -> `Extended language support` -> 选择`fcitx`或`ibus` -> `update system`
@@ -66,7 +66,7 @@ git config --global user.email "---"
  ```
 10. 配置keyboard layout: add `xmodmap ~/.Xmodmap` to file `~/.bashrc` or to `zsh/fish/xprofile` etc.
 11. 安装Miniconda
-    - 从[Miniconda清华源](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/), 下载`Miniconda3-py310_最新日期-Linux-x86_64.sh`, `sh Miniconda3-py310*.sh`安装
+    - 从[Miniconda清华源](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/), 下载`Miniconda3-py310_最新日期-Linux-x86_64.sh` (没选择3.13等更高版本, 是考虑到与pytorch一系列包的兼容问题), `sh Miniconda3-py310*.sh`安装
     - 更新pip源: `python -m pip install --upgrade pip; pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple`
     - 更新conda的源: `~/.condarc`
     - 配置init.py, 安装需要的库(pytorch torchvision torchaudio...)
@@ -77,4 +77,4 @@ git config --global user.email "---"
 14. Fuck GFW:
     - 下载`v2rayN-linux-64.AppImage`, from https://github.com/2dust/v2rayn/releases?after=latest
     - 设置权限并运行, 然后在主界面添加配置
-16. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景
+16. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景(xfce中, 一小时换一次)
