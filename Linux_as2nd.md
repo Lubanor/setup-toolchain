@@ -41,11 +41,12 @@
 然而, 这里还有一系列的后续工作要做, 最主要的就是:
 1. 换源 `sudo pacman-mirrors --fasttrack`
 2. 更新 `sudo pacman -Syu`
-3. 在 Pacman 软件包管理器中, 启用对 Snap 和 Flatpak 的支持
+3. 启用对 `Snap` (和 `Flatpak`? 不要`AUR`!!) 的支持: `sudo pamac install libpamac-snap-plugin`
 4. 启用 TRIM (4SSD) `sudo systemctl enable fstrim.timer`
 5. 安装中文输入法
    - `Manjaro Hello` -> `Applications` -> `Extended language support` -> 选择`fcitx`或`ibus` -> `update system`
-   - 下载安装完成后, 会返回`fcitx/ibus选择界面`, 重启即可
+   - 下载安装完成后, 会返回`fcitx/ibus选择界面`, 重启电脑即可使用
+   - 设置为自动启动, 也可以手工运行`fcitx-autostart`启动
 6. 现在xfce的sh改为zsh了, 比bash确实强不少, 但还是不如fish顺手: `sudo chsh -s /usr/bin/fish [my_user_name]`
 7. git配置
 ```
@@ -57,7 +58,7 @@ git config --global user.email "---"
 9. 安装其他必要的软件
 ```
   fish at amule mpv code neovim xfce4-goodies catfish
-  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xclip fd synapse
+  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst xclip fd synapse xorg-xrandr
   wqy-zenhei wqy-microhei noto-fonts-cjk
   # texlive-core texlive-latexextra texlive-langchinese
  ```
@@ -67,4 +68,9 @@ git config --global user.email "---"
     - 更新pip源: `python -m pip install --upgrade pip; pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple`
     - 更新conda的源: `~/.condarc`
     - 配置init.py, 安装需要的库(pytorch torchvision torchaudio...)
-12. 安装gcc: `sudo pacman -S gcc gcc-libs gdb`
+12. 安装gcc: `sudo pacman -S git gcc gcc-libs make cmake gdb`
+13. 嵌入式开发:
+    - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
+    - 在vscode中, 安装插件: `ESP-IDF`
+14. Fuck GFW: 使用v2ray?
+15. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景
