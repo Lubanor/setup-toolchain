@@ -33,18 +33,18 @@ alias cp='cp -i'
 # for esp-idf, esp32 etc.
 alias get_idf='source $HOME/espressif/esp-idf-v5.4.1/export.fish'
 
-# ~=cd ~ by default
-alias .='cd -'
-alias ,='cd ../'
-alias ,,='cd ../../'
-alias ,,,='cd ../../../'
-alias ,,,,='cd ../../../../'
-alias ,,,,,='cd ../../../../../'
-alias ,,,,,,='cd ../../../../../../'
-alias ,,,,,,,='cd ../../../../../../../'
-alias ,,,,,,,,='cd ../../../../../../../../'
-alias ,,,,,,,,,='cd ../../../../../../../../../'
-alias ,,,,,,,,,,='cd ../../../../../../../../../../'
+# ~=cd ~ by default (在执行脚步时, 这些设置有时会引起误解)
+# alias .='cd -'
+# alias ,='cd ../'
+# alias ,,='cd ../../'
+# alias ,,,='cd ../../../'
+# alias ,,,,='cd ../../../../'
+# alias ,,,,,='cd ../../../../../'
+# alias ,,,,,,='cd ../../../../../../'
+# alias ,,,,,,,='cd ../../../../../../../'
+# alias ,,,,,,,,='cd ../../../../../../../../'
+# alias ,,,,,,,,,='cd ../../../../../../../../../'
+# alias ,,,,,,,,,,='cd ../../../../../../../../../../'
 
 function l
     ll -ah --color=always $argv | less -R
