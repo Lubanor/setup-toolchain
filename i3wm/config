@@ -18,10 +18,9 @@ exec --no-startup-id dex --autostart --environment i3
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the screen before suspend.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is popular to manage wireless networks on Linux, and nm-applet is its system tray.
+# apps: NetworkManager (a popular Linux wireless network manager), powermanager, fcitx
 exec --no-startup-id nm-applet
-
-# fcitx 
+exec --no-startup-id xfce4-power-manager
 exec --no-startup-id fcitx-autostart
 
 # global settings 
