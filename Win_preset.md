@@ -1,6 +1,4 @@
-# toolchain-config
-
-private config for personal tools (Windows mainly, Linux maybe)
+Private config for personal tools (on Windows)
 
 Also ref: [install Linux as the 2nd OS](https://github.com/Lubanor/setup-toolchain/blob/main/Linux_as2nd.md).
 
