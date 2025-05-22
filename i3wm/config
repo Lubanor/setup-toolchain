@@ -24,8 +24,10 @@ exec --no-startup-id nm-applet
 # fcitx 
 exec --no-startup-id fcitx-autostart
 
-# resolution ratio
-exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
+# global settings 
+exec_always --no-startup-id xfsettingsd
+exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -182,8 +184,7 @@ bindsym $mod+Shift+r move container to output up
 bindsym $mod+Shift+p move container to output right
 
 # exit // no reload/restart hotkeys --- run `i3 reload/restart` commands in shell, instead.
-bindsym $mod+Shift+Escape exec \
-   "i3-nagbar -t warning -m 'Do you really want to end your session?' -B 'Yes, exit it' 'i3-msg exit'"
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'Do you really want to end your session?' -B 'Yes, exit it' 'i3-msg exit'"
 bindsym $mod+Escape exec i3lock
 
 # resize window (you can also use the mouse for that)
