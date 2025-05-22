@@ -2,7 +2,6 @@
 
 # Generic
 # set fish_greeting (fortune)
-set EDITOR helix
 
 # Lang
 set -x LANG zh_CN.UTF-8
@@ -14,7 +13,8 @@ set -x LC_MESSAGES $LANG
 # Path
 # set -x GOPATH ~/workshop/go
 set -x PATH /usr/local/sbin $PATH
-set -gx PATH /opt/anaconda/bin $PATH
+set -x ESPPATH ~/espressif/esp-idf-v5.4.1 $PATH
+set -gx PATH /opt/miniconda3/bin $PATH
 # set -gx NVIM_LISTEN_ADDRESS /tmp/neovim/neovim
 
 # Face
@@ -28,7 +28,10 @@ alias md='mkdir -p'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
-alias r='ranger'
+# alias r='ranger'
+
+# for esp-idf, esp32 etc.
+alias get_idf='source $HOME/espressif/esp-idf-v5.4.1/export.fish'
 
 # ~=cd ~ by default
 alias .='cd -'
@@ -41,15 +44,17 @@ alias ,,,,,,='cd ../../../../../../'
 alias ,,,,,,,='cd ../../../../../../../'
 alias ,,,,,,,,='cd ../../../../../../../../'
 alias ,,,,,,,,,='cd ../../../../../../../../../'
+alias ,,,,,,,,,,='cd ../../../../../../../../../../'
 
 function l
     ll -ah --color=always $argv | less -R
 end
 
 # cli editors
-#alias e='emacs'
-#alias v='nvim'
-alias h='helix'
+# alias e='emacs'
+alias v='nvim'
+alias n='nvim-qt'
+# alias h='helix'
 
 # Python
 alias py='ipython'
