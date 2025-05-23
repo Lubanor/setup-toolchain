@@ -12,21 +12,26 @@ title_align center
 workspace_layout stacking
 default_orientation vertical
 
+# Autostart applications
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
+exec --no-startup-id xfsettingsd
+
 # Start XDG autostart .desktop files using [dex](https://wiki.archlinux.org/index.php/XDG_Autostart)
 exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the screen before suspend.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# apps: NetworkManager (a popular Linux wireless network manager), powermanager, fcitx
+# apps: NetworkManager (a popular Linux wireless network manager), powermanager, fcitx, etc
 exec --no-startup-id nm-applet
+exec --no-startup-id pamac-tray
 exec --no-startup-id xfce4-power-manager
+exec --no-startup-id blueman-applet
 exec --no-startup-id fcitx-autostart
-
-# global settings 
-exec_always --no-startup-id xfsettingsd
-exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
-exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id clipit
+exec --no-startup-id volumeicon
+# exec --no-startup-id qv2ray
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
