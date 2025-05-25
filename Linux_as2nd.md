@@ -80,7 +80,11 @@ git config --global user.email "---"
     - 下载`v2rayN-linux-64.AppImage`, from https://github.com/2dust/v2rayn/releases?after=latest
     - 设置权限并运行, 然后在主界面添加配置
 14. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景(xfce中, 一小时换一次)
-15. 安装打印机`sudo snap install hplip-printer-app`
+15. 安装打印机
+```
+sudo pacman -S manjaro-printer
+sudo snap install hplip-printer-app
+```
 16. 嵌入式开发:
     - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
     - 在vscode中, 安装插件: `ESP-IDF`
