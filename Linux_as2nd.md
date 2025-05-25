@@ -43,7 +43,12 @@
 然而, 这里还有一系列的后续工作要做, 最主要的就是:
 1. 换源 `sudo pacman-mirrors --fasttrack`
 2. 更新 `sudo pacman -Syu`
-3. 启用对 `Snap` (和 `Flatpak`? 不要`AUR`!!) 的支持: `sudo pamac install libpamac-snap-plugin` (开启Flatpak, 也会有杂七杂八的问题)
+3. 启用对 `Snap` (和 `Flatpak`? 不要`AUR`!!) 的支持 (开启Flatpak, 也会有杂七杂八的问题):
+```
+sudo pacman -S snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+```
 4. 启用 TRIM (4SSD) `sudo systemctl enable fstrim.timer`
 5. 安装中文输入法
    - `Manjaro Hello` -> `Applications` -> `Extended language support` -> 选择`fcitx`或`ibus` -> `update system`
@@ -71,10 +76,12 @@ git config --global user.email "---"
     - 更新conda的源: `~/.condarc`
     - 配置init.py, 安装需要的库(pytorch torchvision torchaudio...)
 12. 安装gcc: `sudo pacman -S git gcc gcc-libs make cmake gdb`
-13. 嵌入式开发:
-    - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
-    - 在vscode中, 安装插件: `ESP-IDF`
-14. Fuck GFW:
+13. Fuck GFW:
     - 下载`v2rayN-linux-64.AppImage`, from https://github.com/2dust/v2rayn/releases?after=latest
     - 设置权限并运行, 然后在主界面添加配置
-16. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景(xfce中, 一小时换一次)
+14. 调整分辨率`xrandr --output eDP-1 --mode 1920x1200 --rate 60`, 和桌面背景(xfce中, 一小时换一次)
+15. 安装打印机`sudo snap install hplip-printer-app`
+16. 嵌入式开发:
+    - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
+    - 在vscode中, 安装插件: `ESP-IDF`
+    - 安装`arduino IDE`
