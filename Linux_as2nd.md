@@ -87,5 +87,6 @@ sudo snap install hplip-printer-app
 ```
 16. 嵌入式开发:
     - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
-    - 在vscode中, 安装插件: `ESP-IDF`
+    - `sudo pacman -S sdl2 curl mosquitto base-devel`
+    - 在vscode中, 安装插件: `ESP-IDF` (and `platformIO IDE`?)
     - 安装`arduino IDE`
