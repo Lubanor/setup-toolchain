@@ -15,6 +15,7 @@ default_orientation vertical
 # Autostart applications
 exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
+exec --no-startup-id nitrogen --restore
 exec --no-startup-id xfsettingsd
 
 # Start XDG autostart .desktop files using [dex](https://wiki.archlinux.org/index.php/XDG_Autostart)
@@ -29,8 +30,11 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
 exec --no-startup-id fcitx-autostart
-exec --no-startup-id clipit
 exec --no-startup-id volumeicon
+exec --no-startup-id dunst
+# exec --no-startup-id xfce4-notifyd
+exec --no-startup-id xfce4-clipman
+# exec --no-startup-id clipit
 # exec --no-startup-id qv2ray
 
 # Use pactl to adjust volume in PulseAudio.
