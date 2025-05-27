@@ -64,7 +64,7 @@ git config --global user.email "---"
 8. 使用本地时间: `sudo timedatectl set-local-rtc true` # 避免两个系统打架(甚至会影响v2ry)
 9. 安装其他必要的软件
 ```
-  fish at amule mpv code neovim xfce4-goodies catfish awk xclip
+  fish at amule mpv neovim xfce4-goodies catfish awk xclip # 这里安装的vscode=code-oss, 不好
   i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst clipit fd synapse xorg-xrandr
   wqy-zenhei wqy-microhei noto-fonts-cjk ttf-droid ttf-hack ttf-fira-code
   # texlive-core texlive-latexextra texlive-langchinese
@@ -85,8 +85,9 @@ git config --global user.email "---"
 sudo pacman -S manjaro-printer
 sudo snap install hplip-printer-app
 ```
-16. 嵌入式开发:
+16. 开发(尤其是`嵌入式`):
     - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
     - `sudo pacman -S sdl2 curl mosquitto base-devel`
-    - 在vscode中, 安装插件: `ESP-IDF` (and `platformIO IDE`?)
+    - `sudo snap install code --classic`
+    - 在vscode中, 安装插件: `ESP-IDF`, `platformIO IDE`, `vim`, `python`, `c/c++`
     - 安装`arduino IDE`
