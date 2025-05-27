@@ -35,6 +35,7 @@ exec --no-startup-id dunst
 # exec --no-startup-id xfce4-notifyd
 exec --no-startup-id xfce4-clipman
 # exec --no-startup-id clipit
+exec --no-startup-id xfce4-notes
 # exec --no-startup-id qv2ray
 
 # Use pactl to adjust volume in PulseAudio.
@@ -52,7 +53,7 @@ bindsym $mod+F5       scratchpad show
 bindsym $mod+Shift+F5 move scratchpad
 
 # set $editor "alacritty -t 'helix' -e 'helix'"
-# launch
+# launch  # xfce4-appfinder
 bindsym $mod+1       exec "rofi -show window"
 bindsym $mod+Shift+1 exec "rofi -modi drun,run -show run"
 
@@ -99,7 +100,8 @@ bindsym $mod+c exec i3-input -F '%s' -P 'commands> ' -f '-*-terminus-bold-*-norm
 bindsym $mod+Shift+c kill
 
 # set the current working dir. unsupported // zone / zag
-bindsym $mod+z exec i3-input -F 'mark %s' -P 'Zonemark> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
+# bindsym $mod+z exec i3-input -F 'mark %s' -P 'Zonemark> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
+bindsym $mod+z mark Z
 bindsym $mod+Shift+z swap container with mark Z
 
 # split in vertical/horizontal orientation // vertical
