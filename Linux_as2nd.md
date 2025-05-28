@@ -65,7 +65,7 @@ git config --global user.email "---"
 9. 安装其他必要的软件
 ```
   fish at amule mpv neovim xfce4-goodies catfish awk xclip 
-  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst clipit fd synapse xorg-xrandr nitrogen dunst
+  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst clipit fd synapse xorg-xrandr nitrogen dunst volumeicon brightnessctl
   wqy-zenhei wqy-microhei noto-fonts-cjk ttf-droid ttf-hack ttf-fira-code
   # texlive-core texlive-latexextra texlive-langchinese
  ```
@@ -86,7 +86,7 @@ sudo pacman -S manjaro-printer
 sudo snap install hplip-printer-app
 ```
 16. 开发(尤其是`嵌入式`):
-    - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb python python-pip`
+    - `sudo pacman -S --needed flex bison gperf ninja ccache dfu-util libusb # python python-pip`
     - `sudo pacman -S sdl2 curl mosquitto base-devel`
     - `sudo snap install code --classic`
     - 在vscode中, 安装插件: `ESP-IDF`, `platformIO IDE`, `vim`, `python`, `c/c++`
