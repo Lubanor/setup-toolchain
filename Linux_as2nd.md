@@ -1,8 +1,8 @@
 # 2025-5-20 前夜 草记
 
 - 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定:
-- **_平时只以一个系统为主(Linux), 另一个(Win)只为备用._**
-- **Linux中, 只用一个桌面(i3wm), 另一个(xfce)只为备用.**
+- **平时只以一个系统为主(Linux), 另一个(Win)只为备用.**
+- **Linux中, 只用一个桌面(xfce), 另一个(i3wm)只为备用.**
 
 几天没留神, 那个天天想给用户当爹的微软, 最近在PC机的双系统启动上, 又贱呲呲地搞了许多的小动作.
 
@@ -64,8 +64,8 @@ git config --global user.email "---"
 8. 使用本地时间: `sudo timedatectl set-local-rtc true` # 避免两个系统打架(甚至会影响v2ry)
 9. 安装其他必要的软件
 ```
-  fish at amule mpv neovim xfce4-goodies catfish awk xclip 
-  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst clipit fd synapse xorg-xrandr nitrogen dunst volumeicon brightnessctl
+  fish at amule mpv neovim xfce4-goodies catfish awk xclip emacs synapse
+  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst fd xorg-xrandr nitrogen volumeicon brightnessctl # clipit
   wqy-zenhei wqy-microhei noto-fonts-cjk ttf-droid ttf-hack ttf-fira-code
   # texlive-core texlive-latexextra texlive-langchinese
  ```
@@ -90,4 +90,4 @@ sudo snap install hplip-printer-app
     - `sudo pacman -S sdl2 curl mosquitto base-devel`
     - `sudo snap install code --classic`
     - 在vscode中, 安装插件: `ESP-IDF`, `platformIO IDE`, `vim`, `python`, `c/c++`
-    - 安装`arduino IDE`
+    - `arduino IDE`(snap)可以考虑安装, 但没必要
