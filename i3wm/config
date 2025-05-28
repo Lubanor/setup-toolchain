@@ -37,6 +37,7 @@ exec --no-startup-id xfce4-clipman
 # exec --no-startup-id clipit
 exec --no-startup-id xfce4-notes
 # exec --no-startup-id qv2ray
+exec --no-startup-id synapse
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -50,7 +51,7 @@ bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # Screenshot using xfce4-screenshooter # -r for region, -f for fullscreen, -w for window
-bindsym Print exec --no-startup-id xfce4-screenshooter -r
+bindsym Print exec --no-startup-id xfce4-screenshooter
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -201,19 +202,19 @@ bindsym $mod+Shift+r move container to output up
 bindsym $mod+Shift+p move container to output right
 
 # exit // no reload/restart hotkeys --- run `i3 reload/restart` commands in shell, instead.
-bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'Do you really want to end your session?' -B 'Yes, exit it' 'i3-msg exit'"
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'End your i3 session?' -B 'Yes, exit i3wm' 'i3-msg exit'"
 bindsym $mod+Escape exec i3lock
 
 # resize window (you can also use the mouse for that)
 mode "quantify" {
     bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize shrink height 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
     bindsym l resize grow width 10 px or 10 ppt
 
     bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize shrink height 10 px or 10 ppt
-    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
 
     bindsym Return mode "default"
