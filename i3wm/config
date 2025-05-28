@@ -86,7 +86,7 @@ bindsym Mod1+Shift+Tab focus prev
 
 # enter fullscreen mode for the focused container // entire
 bindsym $mod+e fullscreen toggle
-# change container layout (stacked, tabbed, arrange=split_toggle)
+# change container layout (stacked, tabbed, apart=split_toggle)
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+a layout toggle split
@@ -202,7 +202,9 @@ bindsym $mod+Shift+r move container to output up
 bindsym $mod+Shift+p move container to output right
 
 # exit // no reload/restart hotkeys --- run `i3 reload/restart` commands in shell, instead.
-bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'End your i3 session?' -B 'Yes, exit i3wm' 'i3-msg exit'"
+# bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'End your i3 session?' -B 'Yes, exit i3wm' 'i3-msg exit'"
+# sleep
+bindsym $mod+Ctrl+Shift+Escape exec systemctl suspend
 bindsym $mod+Escape exec i3lock
 
 # resize window (you can also use the mouse for that)
