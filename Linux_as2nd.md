@@ -2,7 +2,6 @@
 
 - 安装配置好Manjaro后, 发现两个系统会分散精力 -- 至少要选择每次启动哪个系统. 于是决定:
 - **平时只以一个系统为主(Linux), 另一个(Win)只为备用.**
-- **Linux中, 只用一个桌面(xfce), 另一个(i3wm)只为备用.**
 
 几天没留神, 那个天天想给用户当爹的微软, 最近在PC机的双系统启动上, 又贱呲呲地搞了许多的小动作.
 
@@ -54,6 +53,7 @@ sudo ln -s /var/lib/snapd/snap /snap
    - `Manjaro Hello` -> `Applications` -> `Extended language support` -> 选择`fcitx`或`ibus` -> `update system`
    - 下载安装完成后, 会返回`fcitx/ibus选择界面`, 重启电脑即可使用
    - 设置为自动启动, 也可以手工运行`fcitx-autostart`启动
+   - 设置所选输入法, 主要是zsc -> zhshch等模糊音加上
 6. 现在xfce的sh改为zsh了, 比bash确实强不少, 但还是不如fish顺手: `sudo chsh -s /usr/bin/fish [my_user_name]`
 7. git配置
 ```
@@ -91,3 +91,5 @@ sudo snap install hplip-printer-app
     - `sudo snap install code --classic`
     - 在vscode中, 安装插件: `ESP-IDF`, `platformIO IDE`, `vim`, `python`, `c/c++`
     - `arduino IDE`(snap)可以考虑安装, 但没必要
+17. 安卓 wear os等相关开发?
+18. 可以从xfce4-setting-manager中, 参考xfce启动时加载了什么；可以从manjaro-setting-manager中, 改换内核
