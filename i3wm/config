@@ -40,9 +40,9 @@ exec --no-startup-id synapse
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle   && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@      +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@      -5% && $refresh_i3status
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && $refresh_i3status
 bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Screen brightness controls using brightnessctl
@@ -64,7 +64,7 @@ bindsym $mod+Shift+F5 move scratchpad
 bindsym $mod+1       exec "rofi -show window"
 bindsym $mod+Shift+1 exec "rofi -modi drun,run -show run"
 
-# start an app or switch to it # chrome is very power consuming
+# start an app or switch to it # chrome is very power consuming; dbcmd helps to record working env;
 bindsym $mod+2     [class="(?i)firefox"] focus
 bindsym $mod+3     [class="(?i)code"] focus
 bindsym $mod+4     [class="(?i)doublecmd"] focus
@@ -103,7 +103,7 @@ bindsym $mod+x exec "rofi -modi drun,run -show run"
 bindsym $mod+Shift+x exec xfce4-appfinder
 
 # kill focused window // close
-bindsym $mod+c exec i3-input -F '%s' -P 'commands> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
+bindsym $mod+c exec i3-input -F '%s' -P 'commander> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
 bindsym $mod+Shift+c kill
 
 # set the current working dir. unsupported // zip coding
@@ -185,10 +185,10 @@ bindsym $mod+Control+Shift+Left  move container to workspace prev
 bindsym $mod+Control+Shift+Right move container to workspace next
 
 # put workspaces on specific screens. see available outputs by running xrandr --listmonitors
-#workspace $ws1 output LVDS1
-#workspace $ws2 output LVDS2
-#workspace $ws3 output LVDS3
-#workspace $ws4 output LVDS4
+# workspace $ws1 output LVDS1
+# workspace $ws2 output LVDS2
+# workspace $ws3 output LVDS3
+# workspace $ws4 output LVDS4
 
 bindsym $mod+y focus output left
 bindsym $mod+g focus output down
