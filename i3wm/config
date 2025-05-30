@@ -15,6 +15,7 @@ default_orientation vertical
 # Autostart applications
 exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --rate 60
+exec --no-startup-id systemctl --user status xfce4-notifyd.service
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id xfsettingsd
 
@@ -25,24 +26,22 @@ exec --no-startup-id dex --autostart --environment i3
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # apps: NetworkManager (a popular Linux wireless network manager), powermanager, fcitx, etc
+# exec --no-startup-id clipit # replaced by xfce's clipman
+# exec --no-startup-id dunst # replaced by xfce's notifier
 exec --no-startup-id nm-applet
 exec --no-startup-id pamac-tray
+exec --no-startup-id xfce4-clipman
+exec --no-startup-id fcitx-autostart
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
-exec --no-startup-id fcitx-autostart
-exec --no-startup-id volumeicon
-exec --no-startup-id dunst
-# exec --no-startup-id xfce4-notifyd
-exec --no-startup-id xfce4-clipman
-# exec --no-startup-id clipit
 exec --no-startup-id xfce4-notes
-# exec --no-startup-id qv2ray
+exec --no-startup-id volumeicon
 exec --no-startup-id synapse
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%     && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%     && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle   && $refresh_i3status
 bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -72,10 +71,10 @@ bindsym $mod+4     [class="(?i)doublecmd"] focus
 bindsym $mod+5     [class="(?i)xfce4-terminal"] focus
 bindsym $mod+Return [class="(?i)xfce4-terminal"] focus
 # ---
-bindsym $mod+Shift+2     exec firefox
-bindsym $mod+Shift+3     exec code
-bindsym $mod+Shift+4     exec doublecmd
-bindsym $mod+Shift+5     exec xfce4-terminal
+bindsym $mod+Shift+2      exec firefox
+bindsym $mod+Shift+3      exec code
+bindsym $mod+Shift+4      exec doublecmd
+bindsym $mod+Shift+5      exec xfce4-terminal
 bindsym $mod+Shift+Return exec xfce4-terminal
 
 # switch task
@@ -107,8 +106,8 @@ bindsym $mod+Shift+x exec xfce4-appfinder
 bindsym $mod+c exec i3-input -F '%s' -P 'commands> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
 bindsym $mod+Shift+c kill
 
-# set the current working dir. unsupported // zone / zag
-# bindsym $mod+z exec i3-input -F 'mark %s' -P 'Zonemark> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
+# set the current working dir. unsupported // zip coding
+# bindsym $mod+z exec i3-input -F 'mark %s' -P 'ZipCoding> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
 bindsym $mod+z mark Z
 bindsym $mod+Shift+z swap container with mark Z
 
