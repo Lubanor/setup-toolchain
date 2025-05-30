@@ -61,7 +61,7 @@ bindsym $mod+F5       scratchpad show
 bindsym $mod+Shift+F5 move scratchpad
 
 # set $editor "alacritty -t 'helix' -e 'helix'"
-# launch  # xfce4-appfinder
+# launch
 bindsym $mod+1       exec "rofi -show window"
 bindsym $mod+Shift+1 exec "rofi -modi drun,run -show run"
 
@@ -101,7 +101,7 @@ bindsym $mod+f floating toggle
 
 # start a program launcher // eXec
 bindsym $mod+x exec "rofi -modi drun,run -show run"
-bindsym $mod+Shift+x exec synapse
+bindsym $mod+Shift+x exec xfce4-appfinder
 
 # kill focused window // close
 bindsym $mod+c exec i3-input -F '%s' -P 'commands> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
