@@ -64,8 +64,8 @@ git config --global user.email "---"
 8. 使用本地时间: `sudo timedatectl set-local-rtc true` # 避免两个系统打架(甚至会影响v2ry)
 9. 安装其他必要的软件
 ```
-  fish at amule mpv neovim xfce4-goodies catfish awk xclip emacs synapse
-  i3-wm i3blocks i3lock xss-lock ripgrep rofi dunst fd xorg-xrandr nitrogen volumeicon brightnessctl # clipit
+  fish at amule mpv neovim xfce4-goodies catfish awk xclip emacs synapse ripgrep persepolis fd
+  i3-wm i3blocks i3lock xss-lock rofi xorg-xrandr nitrogen volumeicon brightnessctl # clipit dunst
   wqy-zenhei wqy-microhei noto-fonts-cjk ttf-droid ttf-hack ttf-fira-code
   # texlive-core texlive-latexextra texlive-langchinese
  ```
