@@ -1,0 +1,18 @@
+# ~/.profile
+
+export EDITOR=/usr/bin/nvim
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+# sudo pacman -S go #to install
+# go version #to check it
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+# 如果你安装 Go 的可执行文件路径 (GOROOT/bin) 没有被 pacman 自动加入 PATH，
+# (通常 pacman 会处理好，但以防万一) 你可能也需要确保 Go 的主安装目录在 PATH 中。
+# GOROOT 通常是 /usr/lib/go 或类似路径，其 bin 目录是 /usr/lib/go/bin。
+# pacman 安装的 go 通常会创建符号链接到 /usr/bin/go，所以这一步一般不需要。
+# 你可以通过 `which go` 查看 go 命令的位置。
+export GOPROXY="https://goproxy.cn,direct"
+# 或者其他代理，如阿里云的 export GOPROXY="https://mirrors.aliyun.com/goproxy/,direct"
