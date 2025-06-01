@@ -1,21 +1,7 @@
 # ~/.config/fish/config.fish
 
 # Generic
-# set fish_greeting (fortune)
-
-# Lang
-set -x LANG zh_CN.UTF-8
-set -x LANGUAGE $LANG
-set -x LC_ALL $LANG
-set -x LC_CTYPE $LANG
-set -x LC_MESSAGES $LANG
-
-# Path
-# set -x GOPATH ~/workshop/go
-set -x PATH /usr/local/sbin $PATH
-set -x ESPPATH ~/espressif/esp-idf-v5.4.1 $PATH
-set -gx PATH /opt/miniconda3/bin $PATH
-# set -gx NVIM_LISTEN_ADDRESS /tmp/neovim/neovim
+set fish_greeting (fortune)
 
 # Face
 # use 256 color term
@@ -32,19 +18,6 @@ alias cp='cp -i'
 
 # for esp-idf, esp32 etc.
 alias get_idf='source $HOME/espressif/esp-idf-v5.4.1/export.fish'
-
-# ~=cd ~ by default (在执行脚步时, 这些设置有时会引起误解)
-# alias .='cd -'
-# alias ,='cd ../'
-# alias ,,='cd ../../'
-# alias ,,,='cd ../../../'
-# alias ,,,,='cd ../../../../'
-# alias ,,,,,='cd ../../../../../'
-# alias ,,,,,,='cd ../../../../../../'
-# alias ,,,,,,,='cd ../../../../../../../'
-# alias ,,,,,,,,='cd ../../../../../../../../'
-# alias ,,,,,,,,,='cd ../../../../../../../../../'
-# alias ,,,,,,,,,,='cd ../../../../../../../../../../'
 
 function l
     ll -ah --color=always $argv | less -R
@@ -66,17 +39,6 @@ alias pi='pip install -i https://pypi.tuna.tsinghua.edu.cn/simple'
 ## - run jps on the sever, and copy the URL the sever given
 ## - run jpc on the client, enter the server psw nowhere
 ## - paste the server URL into a client web browser, change 9999 to 8888, and visit the new URL page
-
-# # Rust
-# # rustc
-# alias rcs='rustc'
-# # cargo
-# alias cns='cargo new'
-# alias ccs='cargo check'
-# alias cbd='cargo build'
-# alias crd='cargo run'
-# alias cbr='cargo build --release'
-# alias crr='cargo run release'
 
 # Git
 alias ga='git add -A'
