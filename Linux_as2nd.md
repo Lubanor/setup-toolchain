@@ -65,7 +65,7 @@ git config --global user.email "---"
 9. 安装其他必要的软件
 ```
   fish at amule mpv neovim xfce4-goodies catfish awk xclip emacs synapse ripgrep persepolis fd
-  i3-wm i3blocks i3lock i3-scripts i3-wallpaper i3-default-artwork # do not install manjaro-i3-settings, artwork-i3: conflicts
+  i3-wm i3blocks i3lock # i3-scripts i3-wallpaper i3-default-artwork # manjaro-i3-settings, artwork-i3: conflict! (后面几个都没用, 删)
   xss-lock rofi xorg-xrandr nitrogen volumeicon brightnessctl # clipit dunst
   wqy-zenhei wqy-microhei noto-fonts-cjk ttf-droid ttf-hack ttf-fira-code fortune-mod
   # texlive-core texlive-latexextra texlive-langchinese
