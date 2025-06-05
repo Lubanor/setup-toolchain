@@ -15,6 +15,12 @@
 # Basic Operations:
 #   $mod+Return: Focus launched XFCE4 Terminal
 #   $mos+Return: Launch new XFCE4 Terminal
+#   $mod+Tab:    Focus launched nvim-qt
+#   $mos+Tab:    Launch new nvim-qt
+#   $mod+Esc:    Focus launched Firefox
+#   $mos+Esc:    Launch new Firefox
+#   $mod+BkSpc:  Focus launched Thunar
+#   $mos+BkSpc:  Launch new Thunar
 #   $mod+x:      Launch Rofi (application launcher: drun, run)
 #   $mos+x:      Launch XFCE4 Appfinder
 #   $mos+c:      Kill focused window
@@ -23,7 +29,6 @@
 # Window Focus:
 #   $mod+h/j/k/l: Focus left/down/up/right
 #   $mod+Left/Down/Up/Right: Focus left/down/up/right
-#   $mod+Tab:    Focus next window (via Rofi window list)
 #   Mod1+Tab:    Focus next window directly
 #   Mod1+Shift+Tab: Focus previous window directly
 #   $mod+m / $moc+Up: Focus parent container
@@ -123,6 +128,10 @@ workspace_layout stacking
 # Default split orientation: horizontal or vertical
 # default_orientation vertical
 
+# define a gap for easier mouse op. (large gap makes things worse)
+gaps inner 1px
+# no extra outter gap needed
+
 # === Autostart Applications ===
 # PolicyKit authentication agent
 exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -146,6 +155,7 @@ exec --no-startup-id dex --autostart --environment i3
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # System tray applets
+# synapse was replaced
 exec --no-startup-id nm-applet
 exec --no-startup-id pamac-tray
 exec --no-startup-id xfce4-clipman
@@ -154,7 +164,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id blueman-applet
 exec --no-startup-id xfce4-notes
 exec --no-startup-id volumeicon
-exec --no-startup-id synapse
+exec --no-startup-id persepolis
 
 # === Keybindings ===
 # --- Multimedia & System Controls ---
@@ -175,13 +185,23 @@ bindsym $mos+x exec xfce4-appfinder
 # Rofi for window switching (alternative to Alt+Tab)
 bindsym $mod+1   exec "rofi -show window"
 bindsym $mos+1   exec "rofi -modi drun,run -show run"
-bindsym $mod+Tab exec "rofi -show window"
-bindsym $mos+Tab exec "rofi -show window"
+
+# bindsym $mod+Tab exec "rofi -show window"
+# bindsym $mos+Tab exec "rofi -show window"
 
 # --- Launch or Focus Specific Applications ---
 # Terminal # Launch new terminal if none focused, else focus existing
+bindsym $mod+Escape [class="(?i)firefox"] focus
+bindsym $mos+Escape exec firefox
+
+bindsym $mod+BackSpace [class="(?i)thunar"] focus
+bindsym $mos+BackSpace exec thunar
+
 bindsym $mod+Return [class="(?i)xfce4-terminal"] focus
 bindsym $mos+Return exec xfce4-terminal
+
+bindsym $mod+Tab [class="(?i)nvim-qt"] focus
+bindsym $mos+Tab exec nvim-qt
 
 # Other applications (focus if open, otherwise launch)
 # Syntax: for_window [criteria] focus; exec --no-startup-id application
