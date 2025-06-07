@@ -9,21 +9,21 @@
 #
 # Modifier Keys:
 #   $mod: Mod4 (Super/Windows key)
-#   $mos: Mod4+Shift
-#   $moc: Mod4+Control
+#   $moS: Mod4+Shift
+#   $moC: Mod4+Control
 #
 # Basic Operations:
 #   $mod+Return: Focus launched XFCE4 Terminal
-#   $mos+Return: Launch new XFCE4 Terminal
-#   $mod+Tab:    Focus launched nvim-qt
-#   $mos+Tab:    Launch new nvim-qt
-#   $mod+Esc:    Focus launched Firefox
-#   $mos+Esc:    Launch new Firefox
+#   $moS+Return: Launch new XFCE4 Terminal
+#   $mod+Tab:    Focus launched Firefox
+#   $moS+Tab:    Launch new Firefox
+#   $mod+Esc:    Focus launched nvim-qt
+#   $moS+Esc:    Launch new nvim-qt
 #   $mod+BkSpc:  Focus launched Thunar
-#   $mos+BkSpc:  Launch new Thunar
+#   $moS+BkSpc:  Launch new Thunar
 #   $mod+x:      Launch Rofi (application launcher: drun, run)
-#   $mos+x:      Launch XFCE4 Appfinder
-#   $mos+c:      Kill focused window
+#   $moS+x:      Launch XFCE4 Appfinder
+#   $moS+c:      Kill focused window
 #   $mod+c:      Commander (i3-input prompt)
 #
 # Window Focus:
@@ -31,43 +31,43 @@
 #   $mod+Left/Down/Up/Right: Focus left/down/up/right
 #   Mod1+Tab:    Focus next window directly
 #   Mod1+Shift+Tab: Focus previous window directly
-#   $mod+m / $moc+Up: Focus parent container
-#   $mod+b / $moc+Down: Focus child container
+#   $mod+m / $moC+Up: Focus parent container
+#   $mod+b / $moC+Down: Focus child container
 #
 # Moving Windows:
-#   $mos+h/j/k/l: Move focused window left/down/up/right
-#   $mos+Left/Down/Up/Right: Move focused window left/down/up/right
+#   $moS+h/j/k/l: Move focused window left/down/up/right
+#   $moS+Left/Down/Up/Right: Move focused window left/down/up/right
 #
 # Workspace Management:
 #   $mod+n/i/o/u: Switch to workspace 1/2/3/4
 #   $mod+F1/F2/F3/F4: Switch to workspace 1/2/3/4
-#   $mos+n/i/o/u: Move focused container to workspace 1/2/3/4
-#   $mos+F1/F2/F3/F4: Move focused container to workspace 1/2/3/4
-#   $moc+Left/Right: Switch to previous/next workspace
-#   $moc+Shift+Left/Right: Move container to previous/next workspace
+#   $moS+n/i/o/u: Move focused container to workspace 1/2/3/4
+#   $moS+F1/F2/F3/F4: Move focused container to workspace 1/2/3/4
+#   $moC+Left/Right: Switch to previous/next workspace
+#   $moC+Shift+Left/Right: Move container to previous/next workspace
 #
 # Layout & Splitting:
 #   $mod+s: Set layout to stacking
 #   $mod+t: Set layout to tabbed
 #   $mod+a: Toggle layout (split)
 #   $mod+v: Split vertically
-#   $mos+v: Split horizontally
+#   $moS+v: Split horizontally
 #   $mod+e: Toggle fullscreen for focused container
 #   $mod+f: Toggle floating for focused window
 #   $mod+space: Toggle layout (between tiling and current layout)
-#   $mos+space: Toggle focus mode (between tiling and floating)
+#   $moS+space: Toggle focus mode (between tiling and floating)
 #
 # Scratchpad:
 #   $mod+F5: Show/cycle scratchpad window(s)
-#   $mos+F5: Move focused window to scratchpad
+#   $moS+F5: Move focused window to scratchpad
 #
 # Marks & Swapping:
 #   $mod+z: Mark focused container with "Z"
-#   $mos+z: Swap focused container with container marked "Z"
+#   $moS+z: Swap focused container with container marked "Z"
 #
 # Multi-Monitor:
 #   $mod+y/g/r/p: Focus output left/down/up/right
-#   $mos+y/g/r/p: Move container to output left/down/up/right
+#   $moS+y/g/r/p: Move container to output left/down/up/right
 #
 # Modes:
 #   $mod+q: Enter "quant" mode (resize windows)
@@ -88,8 +88,8 @@
 #   XF86MonBrightnessUp:  Increase screen brightness
 #   XF86MonBrightnessDown:Decrease screen brightness
 #   Print:                Take screenshot (XFCE4 Screenshooter)
-#   $moc+Escape:          Lock screen (i3lock)
-#   $moc+Shift+Escape:    Suspend system
+#   $moC+Escape:          Lock screen (i3lock)
+#   $moC+Shift+Escape:    Suspend system
 #
 # -----------------------------------------------------------------------------
 # End of Cheatsheet
@@ -97,8 +97,8 @@
 
 # === Variables ===
 set $mod Mod4
-set $mos Mod4+Shift
-set $moc Mod4+Control
+set $moS Mod4+Shift
+set $moC Mod4+Control
 
 # === Appearance & General Behavior ===
 # Font for window titles and bar (unless overridden in bar)
@@ -180,28 +180,28 @@ bindsym Print exec --no-startup-id xfce4-screenshooter
 
 # --- Application Launchers ---
 bindsym $mod+x exec "rofi -modi drun,run -show run"
-bindsym $mos+x exec xfce4-appfinder
+bindsym $moS+x exec xfce4-appfinder
 
 # Rofi for window switching (alternative to Alt+Tab)
 bindsym $mod+1   exec "rofi -show window"
-bindsym $mos+1   exec "rofi -modi drun,run -show run"
+bindsym $moS+1   exec "rofi -modi drun,run -show run"
 
 # bindsym $mod+Tab exec "rofi -show window"
-# bindsym $mos+Tab exec "rofi -show window"
+# bindsym $moS+Tab exec "rofi -show window"
 
 # --- Launch or Focus Specific Applications ---
 # Terminal # Launch new terminal if none focused, else focus existing
-bindsym $mod+Escape [class="(?i)firefox"] focus
-bindsym $mos+Escape exec firefox
+bindsym $mod+Tab [class="(?i)firefox"] focus
+bindsym $moS+Tab exec firefox
 
-bindsym $mod+BackSpace [class="(?i)thunar"] focus
-bindsym $mos+BackSpace exec thunar
+bindsym $mod+Escape [class="(?i)nvim-qt"] focus
+bindsym $moS+Escape exec nvim-qt
 
 bindsym $mod+Return [class="(?i)xfce4-terminal"] focus
-bindsym $mos+Return exec xfce4-terminal
+bindsym $moS+Return exec xfce4-terminal
 
-bindsym $mod+Tab [class="(?i)nvim-qt"] focus
-bindsym $mos+Tab exec nvim-qt
+bindsym $mod+BackSpace [class="(?i)thunar"] focus
+bindsym $moS+BackSpace exec thunar
 
 # Other applications (focus if open, otherwise launch)
 # Syntax: for_window [criteria] focus; exec --no-startup-id application
@@ -214,10 +214,10 @@ bindsym $mod+4 [class="(?i)thunar"] focus
 bindsym $mod+5 [class="(?i)xfce4-terminal"] focus
 
 # Launch new instance:
-bindsym $mos+2 exec firefox
-bindsym $mos+3 exec nvim-qt
-bindsym $mos+4 exec thunar
-bindsym $mos+5 exec xfce4-terminal
+bindsym $moS+2 exec firefox
+bindsym $moS+3 exec nvim-qt
+bindsym $moS+4 exec thunar
+bindsym $moS+5 exec xfce4-terminal
 
 # --- Window Management: Focus ---
 bindsym $mod+h focus left
@@ -236,20 +236,20 @@ bindsym Mod1+Shift+Tab focus prev
 
 # Focus parent/child containers
 bindsym $mod+m     focus parent
-bindsym $moc+Up    focus parent
+bindsym $moC+Up    focus parent
 bindsym $mod+b     focus child
-bindsym $moc+Down  focus child
+bindsym $moC+Down  focus child
 
 # --- Window Management: Moving Windows ---
-bindsym $mos+h move left
-bindsym $mos+j move down
-bindsym $mos+k move up
-bindsym $mos+l move right
+bindsym $moS+h move left
+bindsym $moS+j move down
+bindsym $moS+k move up
+bindsym $moS+l move right
 
-bindsym $mos+Left  move left
-bindsym $mos+Down  move down
-bindsym $mos+Up    move up
-bindsym $mos+Right move right
+bindsym $moS+Left  move left
+bindsym $moS+Down  move down
+bindsym $moS+Up    move up
+bindsym $moS+Right move right
 
 # --- Window Management: Layout & State ---
 # Toggle fullscreen for the focused container
@@ -265,25 +265,25 @@ bindsym $mod+f floating toggle
 
 # Split orientation for next split
 bindsym $mod+v split v
-bindsym $mos+v split h
+bindsym $moS+v split h
 
 # Change focus between tiling / floating windows (focus mode toggle)
 bindsym $mod+space layout toggle
-bindsym $mos+space focus mode_toggle
+bindsym $moS+space focus mode_toggle
 
 # --- Window Management: Killing Windows ---
-bindsym $mos+c kill
+bindsym $moS+c kill
 # Commander - custom command execution via i3-input
 bindsym $mod+c exec i3-input -F '%s' -P 'commander> ' -f '-*-terminus-bold-*-normal-*-30-*-*-*-*-*-*-*'
 
 # --- Window Management: Marks & Swapping ---
 # Mark a window with "Z" and swap with it
 bindsym $mod+z mark Z
-bindsym $mos+z swap container with mark Z
+bindsym $moS+z swap container with mark Z
 
 # --- Scratchpad ---
 bindsym $mod+F5 scratchpad show
-bindsym $mos+F5 move scratchpad
+bindsym $moS+F5 move scratchpad
 
 # --- Workspace Management ---
 # Define workspace names (numbers are fine, or use names with icons)
@@ -304,22 +304,22 @@ bindsym $mod+F3 workspace number $ws3
 bindsym $mod+F4 workspace number $ws4
 
 # Move focused container to workspace
-bindsym $mos+n move container to workspace number $ws1
-bindsym $mos+i move container to workspace number $ws2
-bindsym $mos+o move container to workspace number $ws3
-bindsym $mos+u move container to workspace number $ws4
+bindsym $moS+n move container to workspace number $ws1
+bindsym $moS+i move container to workspace number $ws2
+bindsym $moS+o move container to workspace number $ws3
+bindsym $moS+u move container to workspace number $ws4
 # --- Alternative F-key bindings ---
-bindsym $mos+F1 move container to workspace number $ws1
-bindsym $mos+F2 move container to workspace number $ws2
-bindsym $mos+F3 move container to workspace number $ws3
-bindsym $mos+F4 move container to workspace number $ws4
+bindsym $moS+F1 move container to workspace number $ws1
+bindsym $moS+F2 move container to workspace number $ws2
+bindsym $moS+F3 move container to workspace number $ws3
+bindsym $moS+F4 move container to workspace number $ws4
 
 # Switch to previous/next workspace
-bindsym $moc+Left  workspace prev
-bindsym $moc+Right workspace next
+bindsym $moC+Left  workspace prev
+bindsym $moC+Right workspace next
 # Move container to previous/next workspace
-bindsym $moc+Shift+Left  move container to workspace prev
-bindsym $moc+Shift+Right move container to workspace next
+bindsym $moC+Shift+Left  move container to workspace prev
+bindsym $moC+Shift+Right move container to workspace next
 
 # --- Multi-Monitor Management (Output Focus & Moving Containers) ---
 bindsym $mod+y focus output left
@@ -328,10 +328,10 @@ bindsym $mod+r focus output up
 bindsym $mod+p focus output right
 
 # Move container to output (screen)
-bindsym $mos+y move container to output left
-bindsym $mos+g move container to output down
-bindsym $mos+r move container to output up
-bindsym $mos+p move container to output right
+bindsym $moS+y move container to output left
+bindsym $moS+g move container to output down
+bindsym $moS+r move container to output up
+bindsym $moS+p move container to output right
 
 # Assign workspaces to specific outputs (optional, uncomment and set your output names)
 # Run `xrandr` to see your output names (e.g., eDP-1, HDMI-1)
@@ -409,9 +409,9 @@ for_window [class="Xfce4-screenshooter"] floating enable
 
 # === Session Management ===
 # Lock screen
-bindsym $moc+Escape exec i3lock -c 000000
+bindsym $moC+Escape exec i3lock -c 000000
 # Suspend system
-bindsym $moc+Shift+Escape exec systemctl suspend
+bindsym $moC+Shift+Escape exec systemctl suspend
 # Exit i3
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit your i3 session?' -B 'Yes, exit i3' 'i3-msg exit'"
 
