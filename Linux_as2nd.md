@@ -94,3 +94,11 @@ sudo snap install hplip-printer-app
     - `arduino IDE`(snap)可以考虑安装, 但没必要
 17. 安卓 wear os等相关开发?
 18. 可以从xfce4-setting-manager中, 参考xfce启动时加载了什么；可以从manjaro-setting-manager中, 改换内核
+19. 安装kotlin/java:
+    - `sudo pacman -Syu jdk-openjdk` (当下最新版本是24),
+    - `java -version; javac -version`
+    - `sudo pacman -Syu kotlin`
+20. 安装android-studio:
+        ```bash
+        sudo snap install android-studio --classic
+        ```
