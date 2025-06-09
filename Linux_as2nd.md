@@ -101,4 +101,6 @@ sudo snap install hplip-printer-app
 20. 安装android-studio:
         ```bash
         sudo snap install android-studio --classic
+        sudo pacman -Syu qemu-full # for kvm -- 加速模式
+        sudo usermod -aG kvm $USER
         ```
