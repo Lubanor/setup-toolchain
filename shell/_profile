@@ -14,12 +14,24 @@ export LC_ALL="zh_CN.UTF-8"
 export GOPATH="$HOME/go"
 export GOPROXY="https://goproxy.cn,direct"
 
+
+检查Zephyr源代码根目录路径：
+bash
+
+
+# zephyr dir
+export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+# export ZEPHYR_BASE="$HOME/ncs/sdk-nrf/zephyr"
+export ZEPHYR_SDK_INSTALL_DIR="$HOME/zephyr-sdk-0.16.1"
+
 # other pathes
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:/opt/miniconda3/bin"
+export PATH="$PATH:$ZEPHYR_SDK_INSTALL_DIR"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:$HOME/espressif/esp-idf-v5.4.1"
+# let cmake use opt-py firstly!
+export PATH="/opt/miniconda3/bin:$PATH"
 
 # to work with QT/GTK2
 export QT_QPA_PLATFORMTHEME="qt5ct"
