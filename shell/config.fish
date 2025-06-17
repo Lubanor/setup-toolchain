@@ -95,3 +95,27 @@ end
 # To print the current date in my calendar
 # python ~/.ipython/profile_default/startup/50_init.py
 echo
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /opt/miniconda3/bin/conda
+    eval /opt/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/opt/miniconda3/etc/fish/conf.d/conda.fish"
+        . "/opt/miniconda3/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/opt/miniconda3/bin" $PATH
+    end
+end
+# <<< conda initialize <<<
+
+# 告诉系统，我们的Zephyr SDK工具箱在哪里
+# set -gx ZEPHYR_SDK_DIR /home/truth/zephyr-tools/zephyr-sdk-0.16.1
+set -gx ZEPHYR_SDK_INSTALL_DIR /home/truth/zephyr-tools/zephyr-sdk-0.16.1
+
+# 告诉系统，我们使用的是Zephyr自家的工具链
+set -gx ZEPHYR_TOOLCHAIN_VARIANT zephyr
+
+# 告诉系统，Zephyr的基础源码在哪里（west update成功后才会存在）
+# set -gx ZEPHYR_BASE /home/truth/ncs/zephyr
+# set -gx ZEPHYR_BASE /home/truth/ncs/sdk-nrf/zephyr
