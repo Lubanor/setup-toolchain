@@ -13,14 +13,14 @@
 #   $moC: Mod4+Control
 #
 # Basic Operations:
-#   $mod+Return: Focus launched XFCE4 Terminal
-#   $moS+Return: Launch new XFCE4 Terminal
-#   $mod+Tab:    Focus launched Firefox
-#   $moS+Tab:    Launch new Firefox
-#   $mod+Esc:    Focus launched nvim-qt
-#   $moS+Esc:    Launch new nvim-qt
-#   $mod+BkSpc:  Focus launched Thunar
-#   $moS+BkSpc:  Launch new Thunar
+#   $mod+Return: Focus launched terminal
+#   $moS+Return: Launch new terminal
+#   $mod+Tab:    Focus launched browser
+#   $moS+Tab:    Launch new browser
+#   $mod+Esc:    Focus launched edtor
+#   $moS+Esc:    Launch new editor
+#   $mod+BkSpc:  Focus launched filer
+#   $moS+BkSpc:  Launch new filer
 #   $mod+x:      Launch Rofi (application launcher: drun, run)
 #   $moS+x:      Launch XFCE4 Appfinder
 #   $moS+c:      Kill focused window
@@ -74,10 +74,10 @@
 #     - h/j/k/l or Arrows: Resize
 #     - Return/Escape/$mod+q: Exit mode
 #   $mod+w: Enter "watch" mode (jump to specific apps)
-#     - w/e/f/t or 2/3/4/5: Focus Firefox/nvim-qt/Thunar/Terminal
+#     - w/e/f/t or 2/3/4/5: Focus browser/editor/filer/terminal
 #     - Return/Escape/$mod+w: Exit mode
 #   $mod+d: Enter "debut" mode (launch specific apps)
-#     - w/e/f/t or 2/3/4/5: Launch Firefox/nvim-qt/Thunar/Terminal
+#     - w/e/f/t or 2/3/4/5: Launch browser/editor/filer/terminal
 #     - Return/Escape/$mod+d: Exit mode
 #
 # System Controls:
@@ -99,6 +99,16 @@
 set $mod Mod4
 set $moS Mod4+Shift
 set $moC Mod4+Control
+
+# ...
+set $browser_launcher vivaldi.vivaldi-stable
+set $browser_focuser "(?i)vivaldi-stable"
+set $editor_launcher nvim-qt
+set $editor_focuser "(?i)nvim-qt"
+set $terminal_launcher xfce4-terminal
+set $terminal_focuser "(?i)xfce4-terminal"
+set $filer_launcher thunar
+set $filer_focuser "(?i)thunar"
 
 # === Appearance & General Behavior ===
 # Font for window titles and bar (unless overridden in bar)
@@ -168,13 +178,13 @@ exec --no-startup-id persepolis
 
 # === Keybindings ===
 # --- Multimedia & System Controls ---
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +3% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -3% && $refresh_i3status
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set 5%+
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set 3%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 3%-
 
 bindsym Print exec --no-startup-id xfce4-screenshooter
 
@@ -191,33 +201,33 @@ bindsym $moS+1   exec "rofi -modi drun,run -show run"
 
 # --- Launch or Focus Specific Applications ---
 # Terminal # Launch new terminal if none focused, else focus existing
-bindsym $mod+Tab [class="(?i)firefox"] focus
-bindsym $moS+Tab exec firefox
+bindsym $mod+Tab [class=$browser_focuser] focus
+bindsym $moS+Tab exec   $browser_launcher
 
-bindsym $mod+Escape [class="(?i)nvim-qt"] focus
-bindsym $moS+Escape exec nvim-qt
+bindsym $mod+Escape [class=$editor_focuser] focus
+bindsym $moS+Escape exec   $editor_launcher
 
-bindsym $mod+Return [class="(?i)xfce4-terminal"] focus
-bindsym $moS+Return exec xfce4-terminal
+bindsym $mod+Return [class=$terminal_focuser] focus
+bindsym $moS+Return exec   $terminal_launcher
 
-bindsym $mod+BackSpace [class="(?i)thunar"] focus
-bindsym $moS+BackSpace exec thunar
+bindsym $mod+BackSpace [class=$filer_focuser] focus
+bindsym $moS+BackSpace exec   $filer_launcher
 
 # Other applications (focus if open, otherwise launch)
 # Syntax: for_window [criteria] focus; exec --no-startup-id application
 # A more robust way is to use a script or i3-msg to check if it's running.
 # Simpler: one binding to focus, another to launch.
 # Focus existing instance:
-bindsym $mod+2 [class="(?i)firefox"] focus
-bindsym $mod+3 [class="(?i)nvim-qt"] focus
-bindsym $mod+4 [class="(?i)thunar"] focus
-bindsym $mod+5 [class="(?i)xfce4-terminal"] focus
+bindsym $mod+2 [class=$browser_focuser]  focus
+bindsym $mod+3 [class=$editor_focuser]   focus
+bindsym $mod+4 [class=$filer_focuser]    focus
+bindsym $mod+5 [class=$terminal_focuser] focus
 
 # Launch new instance:
-bindsym $moS+2 exec firefox
-bindsym $moS+3 exec nvim-qt
-bindsym $moS+4 exec thunar
-bindsym $moS+5 exec xfce4-terminal
+bindsym $moS+2 exec $browser_launcher
+bindsym $moS+3 exec $editor_launcher
+bindsym $moS+4 exec $filer_launcher
+bindsym $moS+5 exec $terminal_launcher
 
 # --- Window Management: Focus ---
 bindsym $mod+h focus left
@@ -363,15 +373,15 @@ mode "quant" {
 bindsym $mod+w mode "watch"
 mode "watch" {
     # Focus specific applications
-    bindsym w [class="(?i)firefox"] focus; mode "default"
-    bindsym e [class="(?i)nvim-qt"] focus; mode "default"
-    bindsym f [class="(?i)thunar"] focus; mode "default"
-    bindsym t [class="(?i)xfce4-terminal"] focus; mode "default"
+    bindsym w [class=$browser_focuser]  focus; mode "default"
+    bindsym e [class=$editor_focuser]   focus; mode "default"
+    bindsym f [class=$filer_focuser]    focus; mode "default"
+    bindsym t [class=$terminal_focuser] focus; mode "default"
 
-    bindsym 2 [class="(?i)firefox"] focus; mode "default"
-    bindsym 3 [class="(?i)nvim-qt"] focus; mode "default"
-    bindsym 4 [class="(?i)thunar"] focus; mode "default"
-    bindsym 5 [class="(?i)xfce4-terminal"] focus; mode "default"
+    bindsym 2 [class=$browser_focuser]  focus; mode "default"
+    bindsym 3 [class=$editor_focuser]   focus; mode "default"
+    bindsym 4 [class=$filer_focuser]    focus; mode "default"
+    bindsym 5 [class=$terminal_focuser] focus; mode "default"
 
     # Exit "watch" mode
     bindsym Escape mode "default"
@@ -383,15 +393,15 @@ mode "watch" {
 bindsym $mod+d mode "debut"
 mode "debut" {
     # Launch specific applications
-    bindsym w exec firefox; mode "default"
-    bindsym e exec nvim-qt; mode "default"
-    bindsym f exec thunar; mode "default"
-    bindsym t exec xfce4-terminal; mode "default"
+    bindsym w exec $browser_launcher;  mode "default"
+    bindsym e exec $editor_launcher;   mode "default"
+    bindsym f exec $filer_launcher;    mode "default"
+    bindsym t exec $terminal_launcher; mode "default"
 
-    bindsym 2 exec firefox; mode "default"
-    bindsym 3 exec nvim-qt; mode "default"
-    bindsym 4 exec thunar; mode "default"
-    bindsym 5 exec xfce4-terminal; mode "default"
+    bindsym 2 exec $browser_launcher;  mode "default"
+    bindsym 3 exec $editor_launcher;   mode "default"
+    bindsym 4 exec $filer_launcher;    mode "default"
+    bindsym 5 exec $terminal_launcher; mode "default"
 
     # Exit "debut" mode
     bindsym Escape mode "default"
