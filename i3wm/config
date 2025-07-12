@@ -103,12 +103,12 @@ set $moC Mod4+Control
 # ...
 set $browser_launcher vivaldi.vivaldi-stable
 set $browser_focuser "(?i)vivaldi-stable"
-set $editor_launcher nvim-qt
-set $editor_focuser "(?i)nvim-qt"
+set $editor_launcher emacs
+set $editor_focuser "(?i)emacs"
 set $terminal_launcher xfce4-terminal
 set $terminal_focuser "(?i)xfce4-terminal"
-set $filer_launcher thunar
-set $filer_focuser "(?i)thunar"
+set $filer_launcher doublecmd
+set $filer_focuser "(?i)doublecmd"
 
 # === Appearance & General Behavior ===
 # Font for window titles and bar (unless overridden in bar)
