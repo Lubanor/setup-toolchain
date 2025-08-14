@@ -88,8 +88,8 @@
 #   XF86MonBrightnessUp:  Increase screen brightness
 #   XF86MonBrightnessDown:Decrease screen brightness
 #   Print:                Take screenshot (XFCE4 Screenshooter)
-#   $moC+Escape:          Lock screen (i3lock)
-#   $moC+Shift+Escape:    Suspend system
+#   $moC+grave:           Lock screen (i3lock)
+#   $moC+Shift+grave:     Suspend system
 #
 # -----------------------------------------------------------------------------
 # End of Cheatsheet
@@ -419,9 +419,9 @@ for_window [class="Xfce4-screenshooter"] floating enable
 
 # === Session Management ===
 # Lock screen
-bindsym $moC+Escape exec i3lock -c 000000
+bindsym $moC+grave exec i3lock -c 000000
 # Suspend system
-bindsym $moC+Shift+Escape exec systemctl suspend
+bindsym $moC+Shift+grave exec systemctl suspend; exec i3lock
 # Exit i3
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit your i3 session?' -B 'Yes, exit i3' 'i3-msg exit'"
 
