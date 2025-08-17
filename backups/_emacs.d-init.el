@@ -81,12 +81,17 @@
 
 ;; 字体设置
 (set-face-attribute 'default nil
-  :family "Fira Code"
-  :height 130) ;Hack
+  :family "Hack"
+  :height 130) ;Hack ; Fira Code
 
-(set-fontset-font t 'han "SimSun-13") ; 或 "Microsoft YaHei-13", "PingFang SC", "Noto Sans CJK SC"
-(set-fontset-font t 'cjk-misc "SimSun-13")
-(set-face-attribute 'mode-line nil :font "SimSun-13")
+;; 设置中英文字体（推荐配置）
+;; sudo pacman -S ttf-fira-code noto-fonts-cjk  # 安装Fira Code和思源黑体
+(set-face-attribute 'default nil :font "Fira Code-20")  ; 英文字体
+(set-fontset-font t 'han (font-spec :family "Microsoft YaHei" :size 20))  ; 中文字体
+(set-fontset-font t 'cjk-misc (font-spec :family "Microsoft YaHei" :size 20))
+
+;; 可选：模式行字体设置（保持与主字体一致）
+(set-face-attribute 'mode-line nil :font (face-attribute 'default :font))
 
 ;; 主题设置
 (use-package doom-themes
