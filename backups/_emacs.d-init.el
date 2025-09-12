@@ -1,10 +1,9 @@
 ;;; init.el --- Wangz Emacs configuration for Data Scientising
 
 ;;; Commentary:
-;; This configuration aims to provide a streamlined and efficient Emacs setup for data
-;; science tasks, including computer coding, data exploration, and document processing.
-;; It leverages modern packages like use-package, Evil, LSP, and Projectile to enhance
-;; the editing experience.  Key features include:
+;; This configuration aims to provide a streamlined and efficient Emacs setup. It leverages
+;;   packages like use-package, Evil, LSP, and Projectile to enhance editing experience.
+;; Key features include:
 ;; - Modal editing with Evil for Vim-like keybindings.
 ;; - LSP integration for intelligent code completion and analysis.
 ;; - Projectile for project management.
@@ -80,7 +79,9 @@
 (global-visual-line-mode t)
 
 ;; 字体设置
-(set-face-attribute 'default nil :family "Hack" :height 130) ;Hack ; Fira Code
+(set-face-attribute 'default nil
+  :family "Hack"
+  :height 130) ;Hack ; Fira Code
 
 ;; 大幅缩放字体
 (defun my/text-scale-increase-large () (interactive) (text-scale-increase 3))
@@ -90,12 +91,45 @@
 (global-set-key (kbd "C-0") 'text-scale-adjust)
 
 ;; 设置中英文字体（推荐配置）
-;; sudo pacman -S ttf-fira-code noto-fonts-cjk  # 安装Fira Code和思源黑体
-(set-face-attribute 'default nil :font "Fira Code-18")  ; 英文字体
-(set-fontset-font t 'han (font-spec :family "Microsoft YaHei" :size 18))  ; 中文字体
-(set-fontset-font t 'cjk-misc (font-spec :family "Microsoft YaHei" :size 18))
+;; 根据系统类型设置字体
+(cond
+ (*sys=linux*
+  ;; Linux 下中英文字体配置
+  ;; sudo pacman -S ttf-fira-code noto-fonts-cjk  # 安装Fira Code和思源黑体
+  (set-face-attribute 'default nil :font "Fira Code-18")  ; 英文字体
+  (set-fontset-font t 'han (font-spec :family "Noto Sans CJK SC" :size 24))  ; 思源黑体
+  (set-fontset-font t 'cjk-misc (font-spec :family "Noto Sans CJK SC" :size 24)))
+  ; (set-fontset-font t 'han (font-spec :family "Microsoft YaHei" :size 24))  ; 中文字体
+  ; (set-fontset-font t 'cjk-misc (font-spec :family "Microsoft YaHei" :size 24))
 
-;; 可选：模式行字体设置（保持与主字体一致）
+ (*sys=win64*
+  ;; Windows 下中英文字体配置
+  (set-face-attribute 'default nil :font "Cascadia Code-14")  ; 微软官方现代英文等宽字体
+  ;; 中文字体 - Windows 系统自带高质量字体
+  (set-fontset-font t 'han (font-spec :family "Microsoft YaHei UI" :size 36)) ; 微软雅黑UI版
+  (set-fontset-font t 'cjk-misc (font-spec :family "Microsoft YaHei UI" :size 36))
+  (set-fontset-font t 'kana (font-spec :family "Microsoft YaHei UI" :size 36))
+  ;; 更通用的备用字体设置
+  (set-fontset-font t nil (font-spec :family "Microsoft YaHei UI") nil 'prepend))
+
+ (*sys=macos*
+  ;; macOS 下中英文字体配置（可根据需要调整）
+  (set-face-attribute 'default nil :font "Monaco-14")  ; macOS 经典等宽字体
+  (set-fontset-font t 'han (font-spec :family "PingFang SC" :size 16))  ; 苹方字体
+  (set-fontset-font t 'cjk-misc (font-spec :family "PingFang SC" :size 16)))
+
+ (*sys=unix*
+  ;; 其他 Unix 系统的字体配置
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-14")
+  (set-fontset-font t 'han (font-spec :family "WenQuanYi Micro Hei" :size 16))
+  (set-fontset-font t 'cjk-misc (font-spec :family "WenQuanYi Micro Hei" :size 16)))
+)
+
+;; 模式行字体与主字体一致（所有系统通用）
+(set-face-attribute 'mode-line nil :font (face-attribute 'default :font))
+
+
+;; 模式行字体与主字体一致
 (set-face-attribute 'mode-line nil :font (face-attribute 'default :font))
 
 ;; 主题设置
@@ -408,3 +442,4 @@
 (message "<<< Emacs ready in %d seconds." (time-to-seconds (time-since emacs-start-time)))
 
 (provide 'init)
+;;; init.el ends here
