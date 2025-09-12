@@ -80,15 +80,20 @@
 (global-visual-line-mode t)
 
 ;; 字体设置
-(set-face-attribute 'default nil
-  :family "Hack"
-  :height 130) ;Hack ; Fira Code
+(set-face-attribute 'default nil :family "Hack" :height 130) ;Hack ; Fira Code
+
+;; 大幅缩放字体
+(defun my/text-scale-increase-large () (interactive) (text-scale-increase 3))
+(defun my/text-scale-decrease-large () (interactive) (text-scale-decrease 3))
+(global-set-key (kbd "C-=") 'my/text-scale-increase-large)
+(global-set-key (kbd "C--") 'my/text-scale-decrease-large)
+(global-set-key (kbd "C-0") 'text-scale-adjust)
 
 ;; 设置中英文字体（推荐配置）
 ;; sudo pacman -S ttf-fira-code noto-fonts-cjk  # 安装Fira Code和思源黑体
-(set-face-attribute 'default nil :font "Fira Code-20")  ; 英文字体
-(set-fontset-font t 'han (font-spec :family "Microsoft YaHei" :size 20))  ; 中文字体
-(set-fontset-font t 'cjk-misc (font-spec :family "Microsoft YaHei" :size 20))
+(set-face-attribute 'default nil :font "Fira Code-18")  ; 英文字体
+(set-fontset-font t 'han (font-spec :family "Microsoft YaHei" :size 18))  ; 中文字体
+(set-fontset-font t 'cjk-misc (font-spec :family "Microsoft YaHei" :size 18))
 
 ;; 可选：模式行字体设置（保持与主字体一致）
 (set-face-attribute 'mode-line nil :font (face-attribute 'default :font))
@@ -209,8 +214,8 @@
   :ensure t
   :init (setq lsp-keymap-prefix "C-c l")
   :hook
-  (;((python-mode c-mode) . lsp)
-   ;((racket-mode go-mode) . lsp-deferred)
+  (((python-mode c-mode) . lsp)
+   ((racket-mode go-mode) . lsp-deferred)
    (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
@@ -235,6 +240,7 @@
   :hook (python-mode . (lambda ()
                         (require 'lsp-pyright)
                         (pyvenv-mode 1)))
+  (setq lsp-pyright-langserver-command "basedpyright")
   :custom (python-shell-interpreter "python3"))
 
 ;; Jupyter支持 ob-ipython
@@ -402,4 +408,3 @@
 (message "<<< Emacs ready in %d seconds." (time-to-seconds (time-since emacs-start-time)))
 
 (provide 'init)
-;;; init.el ends here
